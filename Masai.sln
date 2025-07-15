@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShopManagement.Domain", "ShopManagement.Domain", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShopManagement", "ShopManagement", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Domain", "SM.Domain", "{4F613197-5AD6-4B80-8F41-A6B9EA493A58}"
 EndProject
@@ -17,7 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Application.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Application", "ShopManagement.Application\ShopManagement.Application.csproj", "{16B680D4-BA61-4F83-8E74-F25389CA5544}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Infrastructure", "SM.Infrastructure", "{056A1A01-E808-4BA5-A3DD-16039C70825D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Infrastructure", "SM.Infrastructure", "{3EAE1FD4-7ABD-4253-A3C4-5BFEB4E51F7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Infrastructure.EFCore", "ShopManagement.Infrastructure.EFCore\ShopManagement.Infrastructure.EFCore.csproj", "{32014EEF-260C-43DD-855A-A564EA4CA4BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{16B680D4-BA61-4F83-8E74-F25389CA5544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16B680D4-BA61-4F83-8E74-F25389CA5544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16B680D4-BA61-4F83-8E74-F25389CA5544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32014EEF-260C-43DD-855A-A564EA4CA4BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32014EEF-260C-43DD-855A-A564EA4CA4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32014EEF-260C-43DD-855A-A564EA4CA4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32014EEF-260C-43DD-855A-A564EA4CA4BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,7 +57,8 @@ Global
 		{7054CF3C-B2DA-4CD1-8E3E-DA6B9C2AEB74} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{87C2FEB1-0751-45A1-8C0B-C6E6BF771272} = {7054CF3C-B2DA-4CD1-8E3E-DA6B9C2AEB74}
 		{16B680D4-BA61-4F83-8E74-F25389CA5544} = {7054CF3C-B2DA-4CD1-8E3E-DA6B9C2AEB74}
-		{056A1A01-E808-4BA5-A3DD-16039C70825D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{3EAE1FD4-7ABD-4253-A3C4-5BFEB4E51F7C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{32014EEF-260C-43DD-855A-A564EA4CA4BF} = {3EAE1FD4-7ABD-4253-A3C4-5BFEB4E51F7C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {807DA000-9569-4908-9153-ACEAE2955BF5}

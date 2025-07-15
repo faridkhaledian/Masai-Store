@@ -15,7 +15,5 @@ namespace _0_Framework.Domain
         {
             CreationDate = DateTime.Now;
         }
-
-
     }
 }
