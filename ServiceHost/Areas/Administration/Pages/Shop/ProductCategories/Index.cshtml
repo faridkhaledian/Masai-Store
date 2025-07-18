@@ -8,11 +8,12 @@
 	ViewData["title"] = "مدیریت گروه محصولات";
 }
 
+
 <div class="row">
 	<div class="col-sm-12">
 		<h4 class="page-title pull-right">@ViewData["title"]</h4>
-		<p class="pull-left">
-			<a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد گروه محصول جدید</a>
+		<p class="pull-left" >
+			<a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")"><span class="fa fa-plus "></span> ایجاد گروه محصول جدید </a>
 		</p>
 	</div>
 </div>
@@ -35,67 +36,54 @@
 		</div>
 	</div>
 </div>
-<div class="row" id="ProductCategoriesDiv">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">لیست گروه محصولات</h3>
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<table id="datatable" class="table table-striped table-bordered">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>عکس</th>
-									<th>نام</th>
-									<th>تاریخ تولید</th>
-									<th>عملیات</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach (var item in Model.ProductCategories)
-								{
-									<tr>
-										<td>@item.Id</td>
-										<td>
-											<img src="@item.Picture" style="width: 70px; height: 70px" />
-										</td>
-										<td>@item.Name</td>
-										<td>@item.CreationDate</td>
-										<td>
-											<a class="btn btn-warning pull-right m-rl-5"
-											   href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
-												<i class="fa fa-edit"></i> ویرایش
-											</a>
-										</td>
-									</tr>
-								}
 
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+
+<div class="panel panel-primary filterable" id="ProductCategoriesDiv">
+	<div class="panel-heading">
+		<h3 class="panel-title">لیست گروه محصولات</h3>
+		<div class="pull-left">
+			<button class="btn btn-default btn-xs btn-filter"><span class="fa fa-filter"></span> فیلتر</button>
 		</div>
 	</div>
+	<table class="table" id="datatable">
+		<thead>
+			<tr class="filters">
+				<th><input type="text" class="form-control" placeholder="#" disabled></th>
+				<th><input type="text" class="form-control" placeholder="عکس" disabled></th>
+				<th><input type="text" class="form-control" placeholder="نام" disabled></th>
+				<th><input type="text" class="form-control" placeholder="تاریخ تولید" disabled></th>
+				<th><input type="text" class="form-control" placeholder="عملیات" disabled></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.ProductCategories)
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>
+						<img src="@item.Picture" style="width: 70px; height: 70px" />
+					</td>
+					<td>@item.Name</td>
+					<td>@item.CreationDate</td>
+					<td>
+						<a class="btn btn-warning pull-right m-rl-5"
+						   href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
+							<i class="fa fa-edit"></i> ویرایش
+						</a>
+					</td>
+				</tr>
+			}
+
+		</tbody>
+	</table>
 </div>
 
 
-
-
-
-
-
-
 @section Scripts {
-	<script src="~/AdminTheme/assets/datatables/jquery.dataTables.min.js"></script>
-	<script src="~/AdminTheme/assets/datatables/dataTables.bootstrap.js"></script>
-
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('#datatable').dataTable();
-		});
-	</script>
-}
+	<script src="~/AdminTheme/dist/js/site.js"></script>
+	<script type="text/javascript"> 
+ 		$(document).ready(function () { 
+ 			$('#datatable').dataTable(); 
+ 		}); 
+ 	</script> 
+    }
