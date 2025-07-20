@@ -24,6 +24,8 @@ function showModal() {
 function hideModal() {
     $("#MainModal").modal("hide");
 }
+
+//start process
 $(document).ready(function () {
     window.onhashchange = function () {     
         SinglePage.LoadModal();
@@ -78,7 +80,7 @@ function CallBackHandler(data, action, form) {
         case "Message":
             alert(data.Message);
             break;
-        case "Refresh": 
+        case "Refresh":        
             if (data.isSucceddd) {
                 window.location.reload();
             } else {

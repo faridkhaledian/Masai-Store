@@ -1,0 +1,143 @@
+﻿
+
+
+
+
+/* مدال جمع‌وجورتر و مینیمال‌تر */
+.modal-sm-custom {
+    max-width: 500px !important;
+    margin: 80px auto !important;
+}
+
+#ModalContent {
+    border-radius: 16px !important;
+    background: #fefefe !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25) !important;
+    animation: zoomIn 0.4s ease-out !important;
+}
+
+/* انیمیشن ورودی */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.85) !important;
+        opacity: 0 !important;
+    }
+
+    to {
+        transform: scale(1) !important;
+        opacity: 1 !important;
+    }
+}
+
+/* هدر */
+.modal-header {
+    background: linear-gradient(to right, #007BFF, #0056b3) !important;
+    color: white !important;
+    padding: 16px 20px !important;
+    border-bottom: none !important;
+    border-radius: 16px 16px 0 0 !important;
+    position: relative !important;
+}
+
+/* عنوان */
+.modal-title {
+    font-weight: bold !important;
+    font-size: 17px !important;
+}
+
+/* دکمه بستن */
+.close-btn {
+    position: absolute !important;
+    left: 20px !important;
+    top: 16px !important;
+    font-size: 24px !important;
+    color: #fff !important;
+    background: none !important;
+    border: none !important;
+    opacity: 0.8 !important;
+    cursor: pointer !important;
+}
+
+    .close-btn:hover {
+        opacity: 1 !important;
+    }
+
+/* بدنه فرم */
+.modal-body {
+    padding: 24px !important;
+    font-size: 14px !important;
+    color: #333 !important;
+}
+
+    .modal-body label {
+        font-weight: 600 !important;
+        margin-bottom: 6px !important;
+        display: block !important;
+        color: #444 !important;
+    }
+
+    .modal-body input.form-control,
+    .modal-body textarea.form-control {
+        border-radius: 10px !important;
+        border: 1px solid #ccc !important;
+        padding: 10px 12px !important;
+        transition: 0.3s !important;
+        font-size: 14px !important;
+        background-color: #fff !important;
+    }
+
+    .modal-body input:focus,
+    .modal-body textarea:focus {
+        border-color: #007BFF !important;
+        box-shadow: 0 0 0 0.15rem rgba(0, 123, 255, 0.25) !important;
+    }
+
+/* خطاها */
+.error {
+    color: #e74c3c !important;
+    font-size: 12px !important;
+    margin-top: 4px !important;
+}
+
+/* فوتر */
+.modal-footer {
+    background-color: #f8f9fa !important;
+    padding: 16px 20px !important;
+    border-radius: 0 0 16px 16px !important;
+    border-top: none !important;
+}
+
+    /* دکمه‌ها */
+    .modal-footer .btn {
+        border-radius: 20px !important;
+        padding: 6px 18px !important;
+        font-weight: bold !important;
+        font-size: 14px !important;
+        transition: 0.3s ease !important;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1) !important;
+    }
+
+    .modal-footer .btn-info {
+        background: linear-gradient(to right, #007BFF, #0056b3) !important;
+        color: white !important;
+        border: none !important;
+    }
+
+        .modal-footer .btn-info:hover {
+            background: linear-gradient(to right, #0056b3, #004080) !important;
+        }
+
+    .modal-footer .btn-default {
+        background-color: #e0e0e0 !important;
+        border: none !important;
+        color: #333 !important;
+    }
+
+        .modal-footer .btn-default:hover {
+            background-color: #ccc !important;
+        }
+
+/* فاصله دکمه‌ها */
+.ms-2 {
+    margin-left: 8px !important;
+}

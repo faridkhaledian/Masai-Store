@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html dir="rtl" lang="fa">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="~/AdminTheme/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="~/AdminTheme/dist/css/TableInAdmin.css">
- 
+ <link rel="stylesheet" href="~/AdminTheme/dist/css/StyleModal.css" />
 	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -544,7 +544,8 @@
             </div>
         </div>
     </div>
- 
+
+
     <!-- jQuery 3 -->
     <script src="~/AdminTheme/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
@@ -564,13 +565,16 @@
 
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">   </script>
+    <script src="~/AdminTheme/dist/js/JqueryModal.js">   </script>
+
 
         <script>
         $(document).ready(function () {
           $('.sidebar-menu').tree()
         }) 
     </script>
-    @RenderSection("Scripts", false);
+    @RenderSection("Scripts", required:false);
+    @RenderSection("IndexProduct", required: false);
 </body>
 </html>
 
