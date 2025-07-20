@@ -1,44 +1,22 @@
 ﻿@page
-@model ServiceHost.Areas.Administration.Pages.Shop.ProductPictures.IndexModel
+@model ServiceHost.Areas.Administration.Pages.Shop.Slides.IndexModel
 @{
 }
-
 @{
 	Layout = "Shared/_AdminLayout";
-	ViewData["title"] = "مدیریت عکس محصولات";
+	ViewData["title"] = "مدیریت اسلاید";
 }
 <div class="row">
 	<div class="col-sm-12">
 		<h4 class="page-title pull-right">@ViewData["title"]</h4>
 		<p class="pull-left">
-			<a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")"><span class="fa fa-plus "></span> ایجاد عکس محصول جدید</a>
+			<a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")"><span class="fa fa-plus "></span>ایجاد اسلاید جدید</a>
 		</p>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">جستجو درعکس محصولات</h3>
-			</div>
-			<div class="panel-body">
-				<form class="form-inline" role="form" method="get">
-					<div class="form-group">
-						<label class="sr-only" asp-for="SearchModel.ProductId"></label>
-						<select class="form-control" asp-for="SearchModel.ProductId" asp-items="Model.Products">
-							<option value="0">  محصول  </option>
-						</select>
-					</div>
-					<button type="submit" class="btn btn-success waves-effect waves-light m-l-10">جستجو</button>
-					<a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index">مشاهده همه</a>
-				</form>
-			</div>
-		</div>
 	</div>
 </div>
 <div class="panel panel-primary filterable" id="ProductCategoriesDiv">
 	<div class="panel-heading">
-		<h3 class="panel-title">لیست عکس محصولات(@Model.ProductPictures.Count)</h3>
+		<h3 class="panel-title">لیست اسلایدها(@Model.Slides.Count)</h3>
 		<div class="pull-left">
 			<button class="btn btn-default btn-xs btn-filter"><span class="fa fa-filter"></span> فیلتر</button>
 		</div>
@@ -48,22 +26,23 @@
 			<tr class="filters">
 				<th><input type="text" class="form-control" placeholder="#" disabled></th>
 				<th><input type="text" class="form-control" placeholder="عکس" disabled></th>
-				<th><input type="text" class="form-control" placeholder="نام محصول" disabled></th>
+				<th><input type="text" class="form-control" placeholder="سرتیتر" disabled></th>
+				<th><input type="text" class="form-control" placeholder="عنوان" disabled></th>
 				<th><input type="text" class="form-control" placeholder="وضعیت" disabled></th>
 				<th><input type="text" class="form-control" placeholder="تاریخ تولید" disabled></th>
 				<th><input type="text" class="form-control" placeholder="عملیات" disabled></th>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var item in Model.ProductPictures)
+			@foreach (var item in Model.Slides)
 			{
 				<tr>
 					<td>@item.Id</td>
 					<td>
 						<img src="@item.Picture" style="width: 70px; height: 70px" />
 					</td>
-					<td>@item.Product</td>
-
+					<td>@item.Heading</td>
+					<td>@item.Title</td>
 					<td class="text-center">
 						@if (!item.IsRemoved)
 						{
@@ -80,6 +59,7 @@
 						   href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
 							<i class="fa fa-edit"></i> ویرایش
 						</a>
+
 						@if (!item.IsRemoved)
 						{
 							<a asp-page="./Index" asp-page-handler="Remove"
@@ -93,10 +73,9 @@
 					</td>
 				</tr>
 			}
-		</tbody>
 	</table>
 </div>
-@section ProductPicture {
+@section Slide {
 	<script src="~/AdminTheme/dist/js/site.js"></script>
 	<script type="text/javascript">
 
