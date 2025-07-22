@@ -1,0 +1,38 @@
+﻿@using _01_MasaiQuery.Contracts.ProductCategory
+@model List<ProductCategoryQueryModel>
+
+<div class="row">
+	<div class="col-12">
+		<div class="brand-slider card border_all bglight">
+			<header class="card-header">
+				<h3 class="card-title"><span>دسته بندی های مَسای</span></h3>
+			</header>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						@foreach (var category in Model)
+						{
+							<div class="col-6 col-md-2 contact-bigicon">
+								<a target="_blank" asp-page="/ProductCategory" asp-route-id="@category.Slug">
+									<img class="img-responsive imgpad" src="@category.Picture" alt="@category.PictureAlt" title="@category.PictureTitle" />
+									<b class="title-3 light-black">@category.Name</b>
+								</a>
+							</div>
+						}
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+

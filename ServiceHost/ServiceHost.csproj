@@ -2615,6 +2615,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\01_MasaiQuery\01_MasaiQuery.csproj" />
     <ProjectReference Include="..\ShopManagement.Configuration\ShopManagement.Configuration.csproj" />
   </ItemGroup>
 
