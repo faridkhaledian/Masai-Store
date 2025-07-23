@@ -32,7 +32,7 @@ namespace ShopManagement.Configuration
             services.AddTransient<ISlideRepository, SlideRepository>();
             services.AddTransient<ISlideQuery, SlideQuery>();
             services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
-            services.AddTransient<IProductQuery, ProductQuery>();
+           // services.AddTransient<IProductQuery, ProductQuery>();
             services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
             //Connect to the database with this connection string.
 
