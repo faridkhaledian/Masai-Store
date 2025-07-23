@@ -1,0 +1,110 @@
+﻿@page
+@model Areas.Administration.Pages.Discounts.CustomerDiscounts.IndexModel
+@{
+}
+@{
+    Layout = "Shared/_AdminLayout";
+    ViewData["title"] = "مدیریت تخفیفات مشتریان";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="page-title pull-right">@ViewData["title"]</h4>
+        <p class="pull-left">
+            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">تعریف تخفیف مشتری</a>
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">جستجو در تخفیفات مشتریان</h3>
+            </div>
+            <div class="panel-body">
+
+                <form class="form-inline" role="form" method="get">
+                    <div class="form-group">
+                        <label class="sr-only" asp-for="SearchModel.StartDate"></label>
+                        <input class="form-control persianDateInput" asp-for="SearchModel.StartDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" asp-for="SearchModel.EndDate"></label>
+                        <input class="form-control persianDateInput" asp-for="SearchModel.EndDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" asp-for="SearchModel.ProducId"></label>
+                        <select class="form-control" asp-for="SearchModel.ProducId" asp-items="Model.Products">
+                            <option value="0">انتخاب محصول ...</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-l-10">جستجو</button>
+                    <a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index">مشاهده همه</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary filterable" id="ProductCategoriesDiv">
+    <div class="panel-heading">
+        <h3 class="panel-title">لیست تخفیفات مشتریان (@Model.CustomerDiscounts.Count)</h3>
+        <div class="pull-left">
+            <button class="btn btn-default btn-xs btn-filter"><span class="fa fa-filter"></span> فیلتر</button>
+        </div>
+    </div>
+    <table class="table" id="datatable">
+        <thead>
+            <tr class="filters">
+                <th><input type="text" class="form-control" placeholder="#" disabled></th>
+                <th><input type="text" class="form-control" placeholder="محصول" disabled></th>
+                <th><input type="text" class="form-control" placeholder="درصد تخفیف" disabled></th>
+                <th><input type="text" class="form-control" placeholder="تاریخ شروع" disabled></th>
+                <th><input type="text" class="form-control" placeholder="تاریخ پایان" disabled></th>
+                <th><input type="text" class="form-control" placeholder="علت تخفیف" disabled></th>
+                <th><input type="text" class="form-control" placeholder="تاریخ تولید" disabled></th>
+                <th><input type="text" class="form-control" placeholder="عملیات" disabled></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CustomerDiscounts)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Product</td>
+                    <td>@item.DiscountRate%</td>
+                    <td>@item.StartDate</td>
+                    <td>@item.EndDate</td>
+                    <td>@item.Reason</td>
+                    <td>@item.CreationDate</td>
+                    <td>
+                        <a class="btn btn-warning waves-effect waves-light m-b-5"
+                           href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id})">
+                            <i class="fa fa-edit"></i> ویرایش
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/AdminTheme/dist/js/site.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatable').dataTable();
+        });
+    </script>
+   
+    <script>
+        $(function () {
+            $('.persianDateInput').persianDatepicker({
+                format: 'YYYY/MM/DD',
+                autoClose: true
+            });
+        });
+    </script>
+
+}
