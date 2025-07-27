@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiscountManagement.Infrastructure.EFCore
 {
- public   class DiscountContext : DbContext
+    public class DiscountContext : DbContext
     {
         public DbSet<CustomerDiscount> CustomerDiscounts { get; set; }
         public DbSet<ColleagueDiscount> ColleagueDiscounts { get; set; }
@@ -17,10 +17,10 @@ namespace DiscountManagement.Infrastructure.EFCore
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var assembly= typeof(CustomerDiscountMapping).Assembly;
+            var assembly = typeof(CustomerDiscountMapping).Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
 
-            base.OnModelCreating(modelBuilder); 
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
