@@ -13,8 +13,8 @@
 				<span class="navbar-toggler-bar bar3"></span>
 			</button>
 			<div class="search-nav default">
-				<form action="#">
-					<input type="text" placeholder="جستجو ...">
+				<form method="get" asp-page="/Search">
+					<input type="text" name="value" id="value" placeholder="جستجو ...">
 					<button type="submit"><img src="~/Theme/assets/img/search.png" alt=""></button>
 				</form>
 				<ul>
@@ -67,8 +67,8 @@
 			</div>
 			<div class="col-lg-8 col-md-5 col-sm-8 col-7">
 				<div class="search-area default">
-					<form action="#" class="search">
-						<input type="text" placeholder="جستجو">
+					<form method="get" asp-page="/Search" class="search">
+						<input type="text" name="value" id="value" placeholder="جستجو">
 						<button type="submit"><img src="~/Theme/assets/img/search.png" alt=""></button>
 					</form>
 				</div>

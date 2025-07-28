@@ -1,5 +1,6 @@
-﻿@page "{id}"
-@model ServiceHost.Pages.ProductCategoryModel
+﻿@page
+@model ServiceHost.Pages.SearchModel
+	
 @{
     Layout = "Shared/_Layout";
     ViewData["title"] = "گروه محصولات";
@@ -11,7 +12,7 @@
             <div class="col-12 hidden-xs">
                 <div class="brand-slider card border_all ">
                     <header class="card-header">
-                        <h3 class="card-title"><span>دسته بندی ها</span></h3>
+                        <h2 class="card-title"><span>نتیجه جستجو برای: @Model.Value</span></h2>
                     </header>
                     <div class="row">
                         <div class="col-12">
@@ -229,7 +230,7 @@
                     <div class="tab-content default text-center">
                         <div class="tab-pane active" id="suggestion" role="tabpanel" aria-expanded="true">
                             <div class="row listing-items">
-                                @foreach (var Product in Model.ProductCategory.Products)
+                                @foreach (var Product in Model.Products)
                                 {
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-12 list_search_p ">
                                         <div class="product-box">
@@ -326,7 +327,7 @@
                                                 <i class="fa fa-search search_icon_search" aria-hidden="true"></i>
                                                 <i class="fa fa-heart search_icon_like" aria-hidden="true"></i>
                                             </span>
-                                             <span class="search_prod_btn">
+                                            <span class="search_prod_btn">
                                                 <i class="fa fa fa-cart-arrow-down search_icon_cart" aria-hidden="true"></i>
                                             </span>
                                         </div>
@@ -1702,5 +1703,3 @@
         </div>
     </div>
 </main>
-
-

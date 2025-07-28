@@ -1,22 +1,27 @@
+using _01_LampshadeQuery.Contracts.Product;
 using _01_MasaiQuery.Contracts.ProductCategory;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 
 namespace ServiceHost.Pages
 {
-    public class ProductCategoryModel : PageModel
+    public class SearchModel : PageModel
     {
-        public ProductCategoryQueryModel ProductCategory;
+        public string Value;
         public List<ProductCategoryQueryModel> ListProductCategories;
+        public List<ProductQueryModel> Products;
+        private readonly IProductQuery _productQuery;
         private readonly IProductCategoryQuery _productCategoryQuery;
-        
-        public ProductCategoryModel(IProductCategoryQuery productCategoryQuery)
+        public SearchModel(IProductQuery productQuery,IProductCategoryQuery productCategoryQuery)
         {
+            _productQuery = productQuery;
             _productCategoryQuery = productCategoryQuery;
         }
-        public void OnGet(string id)
+
+        public void OnGet(string value)
         {
-            ProductCategory = _productCategoryQuery.GetProductCategoryWithProductsBy(id);
+            Value = value;
+            Products = _productQuery.Search(value);
             ListProductCategories = _productCategoryQuery.GetProductCategories();
         }
     }

@@ -1,0 +1,59 @@
+﻿@using _01_LampshadeQuery.Contracts.Product
+@{
+}
+@model List<ProductQueryModel>
+@{
+   
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="widget widget-product card border_all bglight pad_time_prod" id="shegeft_1">
+            <header class="card-header">
+                <h3 class="card-title">
+                    <span>
+                        <img src="~/Theme/assets/img/shegeft_1.png" />
+                    </span>
+                </h3>
+                <div class="countdown-timer" countdown data-date="06 12 2023 20:20:22">
+                    <ul class="text_countdown">
+                        <li data-days class="number_countdown">3</li>
+                        <li>روز</li>
+                    </ul>
+                    <ul class="text_countdown">
+                        <li data-hours class="number_countdown">14</li>
+                        <li>ساعت</li>
+                    </ul>
+                   <ul class="text_countdown">
+                        <li data-minutes class="number_countdown">10</li>
+                        <li>دقیقه</li>
+                    </ul>
+                    <ul class="text_countdown">
+                        <li data-seconds class="number_countdown">0</li>
+                        <li>ثانیه</li>
+                    </ul> 
+                </div>
+            </header>
+            <div class="product-carousel owl-carousel owl-theme">
+                @foreach (var product in Model)
+                {
+                    <div class="item">
+                        <a href="single-product.html">
+                            <img src="@product.Picture" class="img-fluid" alt="@product.PictureAlt" title="@product.PictureTitle">
+                        </a>
+                        <h2 class="product_title">
+                            <a href="single-product.html"> @product.Name  </a>
+                        </h2>
+                        <div class="price">
+                            <del><span>@product.Price<span>تومان</span></span></del>
+                            <span class="discount_badge">@product.DiscountRate%</span>
+                            <ins><span>@product.PriceWithDiscount<span>تومان</span></span></ins>
+                        </div>
+                    </div>
+                }               
+            </div>
+            <a href="#" class="view_more">مشاهده بیشتر</a>
+        </div>
+    </div>
+</div>
+

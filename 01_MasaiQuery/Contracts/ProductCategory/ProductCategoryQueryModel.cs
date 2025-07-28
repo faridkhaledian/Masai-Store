@@ -1,6 +1,4 @@
-﻿
-
-using _01_LampshadeQuery.Contracts.Product;
+﻿using _01_LampshadeQuery.Contracts.Product;
 
 namespace _01_MasaiQuery.Contracts.ProductCategory
 {
@@ -17,5 +15,4 @@ namespace _01_MasaiQuery.Contracts.ProductCategory
         public string Description { get;  set; }
         public List<ProductQueryModel> Products { get; set; }
     }
-
 }
