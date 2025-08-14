@@ -4977,3 +4977,104 @@ table.text-center th {
 }
 
 
+/*////////////////////////////////*/
+/* ===== File: Picture - Modern, clean, blue ===== */
+:root {
+    --brand: #1e88e5; /* آبی هدر */
+    --brand-600: #1565c0;
+    --brand-900: #0d47a1;
+    --brand-soft: #e3f2fd;
+}
+
+/* فقط فیلد Picture را استایل بده */
+input[type="file"]#Picture.form-control {
+    display: block;
+    width: 100%;
+    height: auto;
+    direction: rtl; /* هماهنگ با فرم فارسی */
+    padding: .9rem 1rem; /* پدینگ واقعی، نه ارتفاع اجباری بوت‌استرپ */
+    border: 2px dashed var(--brand);
+    border-radius: 14px;
+    background: #f7fbff;
+    color: var(--brand-900);
+    font-weight: 600;
+    line-height: 1.2;
+    overflow: hidden; /* جلوگیری از به‌هم‌ریختگی محتوا */
+    transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+
+    input[type="file"]#Picture.form-control:hover {
+        background: var(--brand-soft);
+        border-color: var(--brand-600);
+        box-shadow: 0 6px 18px rgba(21,101,192,.18);
+    }
+
+    input[type="file"]#Picture.form-control:focus {
+        outline: 0;
+        border-color: var(--brand-900);
+        box-shadow: 0 0 0 4px rgba(30,136,229,.18);
+        background: var(--brand-soft);
+    }
+
+    /* دکمه داخلی استاندارد (کروم، اج، فایرفاکس جدید) */
+    input[type="file"]#Picture.form-control::file-selector-button {
+        margin-inline-start: .5rem; /* در RTL دکمه سمت راست می‌نشیند */
+        padding: .55rem 1rem;
+        border: 0;
+        border-radius: 10px;
+        background: linear-gradient(45deg,#42a5f5,var(--brand));
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform .15s ease, box-shadow .25s ease, background .25s ease;
+        box-shadow: 0 8px 18px rgba(30,136,229,.25);
+    }
+
+        input[type="file"]#Picture.form-control::file-selector-button:hover {
+            transform: translateY(-1px);
+            background: linear-gradient(45deg,var(--brand),var(--brand-900));
+            box-shadow: 0 12px 22px rgba(13,71,161,.28);
+        }
+
+        input[type="file"]#Picture.form-control::file-selector-button:active {
+            transform: translateY(0);
+            box-shadow: 0 6px 14px rgba(13,71,161,.22);
+        }
+
+    /* سازگاری WebKit قدیمی (سافاری/کروم‌های قدیمی) */
+    input[type="file"]#Picture.form-control::-webkit-file-upload-button {
+        margin-inline-start: .5rem;
+        padding: .55rem 1rem;
+        border: 0;
+        border-radius: 10px;
+        background: linear-gradient(45deg,#42a5f5,var(--brand));
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform .15s ease, box-shadow .25s ease, background .25s ease;
+        box-shadow: 0 8px 18px rgba(30,136,229,.25);
+    }
+
+    input[type="file"]#Picture.form-control:hover::-webkit-file-upload-button {
+        transform: translateY(-1px);
+        background: linear-gradient(45deg,var(--brand),var(--brand-900));
+        box-shadow: 0 12px 22px rgba(13,71,161,.28);
+    }
+
+    /* ظاهر نام فایل مرتب و بدون به‌هم‌ریختگی */
+    input[type="file"]#Picture.form-control::-ms-value {
+        color: var(--brand-900);
+    }
+/* قدیمی‌ها */
+input[type="file"]#Picture.form-control {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* پیام خطا زیر همین فیلد (در صورت استفاده) */
+span[data-valmsg-for="Picture"], span.field-validation-error[for="Picture"] {
+    color: #c62828;
+    font-size: .85rem;
+}
+
+

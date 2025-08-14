@@ -1,3 +1,4 @@
+using _0_Framework.Application;
 using DiscountManagement.Configuration;
 using InventoryManagement.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +27,7 @@ namespace ServiceHost
             ShopManagementBoostrapper.Configure(services  , connectionString);
             DiscountManagementBootstrapper.Configure(services, connectionString);
             InventoryManagementBootstrapper.Configure(services, connectionString);
-
+            services.AddTransient<IFileUploader , FileUploader>();
             services.AddRazorPages();
         }
 

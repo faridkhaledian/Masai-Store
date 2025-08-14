@@ -20,7 +20,7 @@
                                 {
                                     <div class="col-6 col-md-2 contact-bigicon">
                                         <a asp-page="/ProductCategory" asp-route-id="@category.Slug" target="_blank">
-                                            <img class="img-responsive imgpad" src="@category.Picture" alt="@category.PictureAlt" title="@category.PictureTitle" />
+                                            <img class="img-responsive imgpad" src="~/FileUploade/@category.Picture" alt="@category.PictureAlt" title="@category.PictureTitle" />
                                             <b class="title-3 light-black"> @category.Name</b>
                                         </a>
                                     </div>
@@ -243,7 +243,7 @@
                                                 </span>
                                             </div>
                                             <a class="product-box-img" href="single-product.html">
-                                                <img src="@Product.Picture" alt="@Product.PictureAlt" title="@Product.PictureTitle">
+                                                <img src="~/FileUploade/@Product.Picture" alt="@Product.PictureAlt" title="@Product.PictureTitle">
                                                 <ul>
                                                     <li class="color_pro" style="background-color: #2fabd3;top: 7px;"></li>
                                                     <li class="color_pro" style="background-color: #4e1dac;top: 20px;"></li>

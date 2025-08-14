@@ -184,14 +184,15 @@ jQuery.validator.addMethod("maxFileSize",
     });
 jQuery.validator.unobtrusive.adapters.addBool("maxFileSize");
 
-jQuery.validator.addMethod("maxFileSize",
-    function (value, element, params) {
-        var size = element.files[0].size;
-        var maxSize = 3 * 1024 * 1024;      
-        if (size > maxSize)
-            return false;
-        else {
-            return true;
-        }
-    });
-jQuery.validator.unobtrusive.adapters.addBool("maxFileSize");
+
+
+
+const allowedImageFormats = ["jpg", "jpeg", "png"];
+jQuery.validator.addMethod("FileExtentionLimitation", function (value, element) {
+    if (element.files.length === 0) return true;
+    const fileName = element.files[0].name;
+    const fileExtension = fileName.split(".").pop().toLowerCase();
+    return allowedImageFormats.includes(fileExtension);
+});
+
+jQuery.validator.unobtrusive.adapters.addBool("FileExtentionLimitation");
