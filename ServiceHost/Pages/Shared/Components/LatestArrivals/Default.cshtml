@@ -536,8 +536,6 @@
         </div>
     </section>
 </div>
-
-
 <div class="col-3 hidden-xs hidden-md">
     <div class="widget-bid-s widget card border_all ">
         <div id="bid-s" class="owl-carousel owl-theme">
@@ -545,11 +543,11 @@
             {
                 <div class="item">
                         <span class="new New_badge">جدید</span>
-                    <a href="single-product.html">
+                    <a asp-page="/Product" asp-route-id="@product.Slug">
                         <img src="~/FileUploade/@product.Picture" alt="@product.PictureAlt" title="@product.PictureTitle" class="w-100" alt="">
                     </a>
                     <h3 class="product-title">
-                        <a href="#"> @product.Name </a>
+                        <a asp-page="/Product" asp-route-id="@product.Slug"> @product.Name </a>
                     </h3>
                     <div class="price">
                         @if (product.HasDiscount)

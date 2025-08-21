@@ -12,8 +12,10 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         {
             _context = context;
         }
+        #region GetDetails
         public EditSlide GetDetails(long id)
         {
+            //get slide from the EditSlide
             return _context.Slides.Select(x => new EditSlide
             {
                 Id = x.Id,
@@ -21,21 +23,28 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 Heading = x.Heading,
                 PictureAlt = x.PictureAlt,
                 PictureTitle = x.PictureTitle,
-                Text=x.Text,
-                Link=x.Link,
+                Text = x.Text,
+                Link = x.Link,
                 Title = x.Title
             }).FirstOrDefault(x => x.Id == id);
         }
+
+        #endregion
+        #region GetList
         public List<SlideViewModel> GetList()
         {
-        return _context.Slides.Select(x=> new SlideViewModel { 
-        Id=x.Id,
-        Heading=x.Heading,
-        Picture=x.Picture,
-        Title=x.Title,
-        IsRemoved=x.IsRemoved,
-        CreationDate=x.CreationDate.ToFarsi()
-        }).OrderByDescending(x=> x.Id).ToList();
+            //get list of SlideViewModel
+            return _context.Slides.Select(x => new SlideViewModel
+            {
+                Id = x.Id,
+                Heading = x.Heading,
+                Picture = x.Picture,
+                Title = x.Title,
+                IsRemoved = x.IsRemoved,
+                CreationDate = x.CreationDate.ToFarsi()
+            }).OrderByDescending(x => x.Id).ToList();
         }
+
+        #endregion
     }
 }

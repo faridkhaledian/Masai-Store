@@ -12,22 +12,28 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         {
             _context = context;
         }
+        #region GetDetails
         public EditProductCategory GetDetails(long id)
         {
+            //get productCategory with id of dataBase
             return _context.ProductCategories.Select(x => new EditProductCategory()
             {
-             Id = x.Id,
-             Name = x.Name,
-             Description = x.Description,
-             Keywords = x.Keywords,
-             MetaDescription = x.MetaDescription,
-             PictureAlt = x.PictureAlt,
-             PictureTitle = x.PictureTitle,
-             Slug = x.Slug
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                Keywords = x.Keywords,
+                MetaDescription = x.MetaDescription,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle,
+                Slug = x.Slug
             }).FirstOrDefault(x => x.Id == id);
         }
+
+        #endregion
+        #region GetProductCategories
         public List<ProductCategoryViewModel> GetProductCategories()
         {
+            ////get list productCategories of dataBase
             return _context.ProductCategories.Select(x => new ProductCategoryViewModel
             {
                 Id = x.Id,
@@ -35,21 +41,25 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
             }).ToList();
         }
 
+        #endregion
+        #region GetSlugById
         public string GetSlugById(long id)
         {
             return _context.ProductCategories.Select(x => new { x.Id, x.Slug }).SingleOrDefault(x => x.Id == id).Slug;
 
         }
-
+        #endregion
+        #region Search
         public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel)
         {
+            //Getting list ProductCategories from the ProductCategoryViewModel
             var query = _context.ProductCategories.Select(x => new ProductCategoryViewModel
             {
                 Id = x.Id,
                 Picture = x.Picture,
                 Name = x.Name,
                 CreationDate = x.CreationDate.ToFarsi(),
-                 PictureAlt = x.PictureAlt,
+                PictureAlt = x.PictureAlt,
                 PictureTitle = x.PictureTitle
             });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
@@ -58,5 +68,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
             }
             return query.OrderByDescending(x => x.Id).ToList();
         }
+
+        #endregion
+
     }
 }

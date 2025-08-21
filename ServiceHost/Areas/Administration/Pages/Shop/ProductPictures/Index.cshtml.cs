@@ -21,11 +21,17 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures
             _productApplication = productApplication;
             _productPictureApplication = productPitureApplication;
         }
+
+        #region OnGet
         public void OnGet(ProductPictureSearchModel searchModel)
         {
             Products = new SelectList(_productApplication.GetProducts(), "Id", "Name");
             ProductPictures = _productPictureApplication.Search(searchModel);
         }
+
+        #endregion
+
+        #region OnGetCreate
         public IActionResult OnGetCreate()
         {
             var command = new CreateProductPicture
@@ -34,22 +40,37 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures
             };
             return Partial("./Create", command);
         }
+        #endregion
+
+        #region OnPostCreate
         public JsonResult OnPostCreate(CreateProductPicture command)
         {
             var result = _productPictureApplication.Create(command);
             return new JsonResult(result);
         }
+
+        #endregion
+
+        #region OnGetEdit
         public IActionResult OnGetEdit(long id)
         {
             var ProductPicture = _productPictureApplication.GetDetails(id);
             ProductPicture.Products = _productApplication.GetProducts();
             return Partial("Edit", ProductPicture);
         }
+        #endregion
+
+        #region OnPostEdit
         public JsonResult OnPostEdit(EditProductPicture command)
         {
+            //if (ModelState.IsValid) { 
+            //}
             var result = _productPictureApplication.Edit(command);
             return new JsonResult(result);
         }
+        #endregion
+
+        #region OnGetRemove
         public IActionResult OnGetRemove(long id)
         {
             var result = _productPictureApplication.Remove(id);
@@ -60,6 +81,10 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures
             Message = result.Message;
             return RedirectToPage("./Index");
         }
+
+        #endregion
+
+        #region OnGetRestore
         public IActionResult OnGetRestore(long id)
         {
             var result = _productPictureApplication.Restore(id);
@@ -70,5 +95,22 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures
             Message = result.Message;
             return RedirectToPage("./Index");
         }
+
+        #endregion
+
+        #region Delete
+        public IActionResult OnGetDelete(long id)
+        {
+            var result = _productPictureApplication.Delete(id);
+            if (result.IsSucceddd)
+            {
+                return RedirectToPage("./Index");
+            }
+            TempData["Message"] = result.Message;
+            return RedirectToPage("./Index");
+
+        }
+        #endregion
+
     }
 }

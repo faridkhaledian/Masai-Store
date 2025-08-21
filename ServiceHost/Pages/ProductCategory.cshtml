@@ -229,55 +229,57 @@
                     <div class="tab-content default text-center">
                         <div class="tab-pane active" id="suggestion" role="tabpanel" aria-expanded="true">
                             <div class="row listing-items">
-                                @foreach (var Product in Model.ProductCategory.Products)
-                                {
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-12 list_search_p ">
-                                        <div class="product-box">
-                                            <div class="product-seller-details product-seller-details-item-grid">
-                                                <span class="search_prod_icon">
-                                                    <i class="fa fa-search search_icon_search" aria-hidden="true"></i>
-                                                    <i class="fa fa-heart search_icon_like" aria-hidden="true"></i>
-                                                </span>
-                                                <span class="search_prod_btn">
-                                                    <i class="fa fa fa-cart-arrow-down search_icon_cart" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
-                                            <a class="product-box-img" href="single-product.html">
-                                                <img src="~/FileUploade/@Product.Picture" alt="@Product.PictureAlt" title="@Product.PictureTitle">
-                                                <ul>
-                                                    <li class="color_pro" style="background-color: #2fabd3;top: 7px;"></li>
-                                                    <li class="color_pro" style="background-color: #4e1dac;top: 20px;"></li>
-                                                    <li class="color_pro" style="background-color: #ff0075;top: 33px;"></li>
-                                                </ul>
-                                            </a>
-                                            <div class="product-box-content">
-                                                <div class="product-box-content-row">
-                                                    <div class="product_title">
-                                                        <a href="#">
-                                                            @Product.Name
-                                                        </a>
-                                                    </div>
-                                                    <span class="category">
-                                                        <a asp-page="/productcategory" asp-route-id="@Product.CategorySlug"> @Product.Category</a>
+                                    @foreach (var Product in Model.ProductCategory.Products)
+                                    {
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-12 list_search_p ">
+                                            <div class="product-box">
+                                                <div class="product-seller-details product-seller-details-item-grid">
+                                                    <span class="search_prod_icon">
+                                                        <i class="fa fa-search search_icon_search" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart search_icon_like" aria-hidden="true"></i>
+                                                    </span>
+                                                    <span class="search_prod_btn">
+                                                        <i class="fa fa fa-cart-arrow-down search_icon_cart" aria-hidden="true"></i>
                                                     </span>
                                                 </div>
-                                                <div class="product-box-row product_price_search">
-                                                    <div class="price">
-                                                        @if (Product.HasDiscount)
-                                                        {
-                                                            <del><span class="amount">@Product.Price<span>تومان</span></span> </del>
-                                                            <span class="amount">@Product.PriceWithDiscount<span>تومان</span> <span class="discount_badge">@Product.DiscountRate%</span></span>
-                                                        }
-                                                        else
-                                                        {
-                                                            <span class="amount">@Product.Price<span>تومان</span> </span>
-                                                        }
+                                                <a class="product-box-img" asp-page="/Product" asp-route-id="@Product.Slug">
+                                                    <img src="~/FileUploade/@Product.Picture" alt="@Product.PictureAlt" title="@Product.PictureTitle">
+                                                    <ul>
+                                                        <li class="color_pro" style="background-color: #2fabd3;top: 7px;"></li>
+                                                        <li class="color_pro" style="background-color: #4e1dac;top: 20px;"></li>
+                                                        <li class="color_pro" style="background-color: #ff0075;top: 33px;"></li>
+                                                    </ul>
+                                                </a>
+                                                <div class="product-box-content">
+                                                    <div class="product-box-content-row">
+                                                        <div class="product_title">
+                                                            <a asp-page="/Product" asp-route-id="@Product.Slug">
+                                                                @Product.Name
+                                                            </a>
+                                                        </div>
+                                                        <span class="category">
+                                                            <a asp-page="/ProductCategory" asp-route-id="@Product.CategorySlug"> @Product.Category</a>
+                                                        </span>
+                                                    </div>
+                                                    <div class="product-box-row product_price_search">
+                                                        <div class="price">
+                                                            @if (Product.HasDiscount)
+                                                            {
+                                                                <del><span class="amount">@Product.Price<span>تومان</span></span> </del>
+                                                                <span class="amount">@Product.PriceWithDiscount<span>تومان</span> <span class="discount_badge">@Product.DiscountRate%</span></span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="amount">@Product.Price<span>تومان</span> </span>
+                                                            }
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
+                                
+                              
                             </div>
                         </div>
                         <div class="tab-pane" id="most-visited" role="tabpanel" aria-expanded="false">

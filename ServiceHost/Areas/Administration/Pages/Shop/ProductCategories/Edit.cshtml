@@ -26,7 +26,7 @@
             </div><div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Slug" class="control-label">اسلاگ</label>
-                    <input type="text" class="form-control" asp-for="Slug" onchange="makeSlug('Name', 'Slug')">
+                    <input type="text" class="form-control" asp-for="Slug" onchange="makeSlug( 'Slug','Name')">
                     <span asp-validation-for="Slug" class="error"></span>
                 </div>
             </div>
@@ -61,8 +61,8 @@
                 <div class="form-group no-margin">
                     <label asp-for="Description" class="control-label">توضیحات</label>
                     <textarea class="form-control autogrow" asp-for="Description" onchange="fillField('Description', 'MetaDescription')"
-                              style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>       
-
+                              style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
+                    <span asp-validation-for="Description" class="error"></span>
                 </div>
             </div>
         </div>

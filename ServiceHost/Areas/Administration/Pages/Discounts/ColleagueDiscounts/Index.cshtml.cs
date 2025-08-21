@@ -25,12 +25,16 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
             _colleagueDiscountApplication = colleagueDiscountApplication;
         }
 
+        #region OnGet
         public void OnGet(ColleagueDiscountSearchModel searchModel)
         {
             Products = new SelectList(_productApplication.GetProducts(), "Id", "Name");
             ColleagueDiscounts = _colleagueDiscountApplication.Search(searchModel);
         }
 
+        #endregion
+
+        #region OnGetCreate
         public IActionResult OnGetCreate()
         {
             var command = new DefineColleagueDiscount
@@ -40,12 +44,18 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
             return Partial("./Create", command);
         }
 
+        #endregion
+
+        #region OnPostCreate
         public JsonResult OnPostCreate(DefineColleagueDiscount command)
         {
             var result = _colleagueDiscountApplication.Define(command);
             return new JsonResult(result);
         }
 
+        #endregion
+
+        #region OnGetEdit
         public IActionResult OnGetEdit(long id)
         {
             var colleagueDiscount = _colleagueDiscountApplication.GetDetails(id);
@@ -53,22 +63,52 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
             return Partial("Edit", colleagueDiscount);
         }
 
+        #endregion
+
+        #region OnPostEdit
         public JsonResult OnPostEdit(EditColleagueDiscount command)
         {
             var result = _colleagueDiscountApplication.Edit(command);
             return new JsonResult(result);
         }
 
+        #endregion
+
+        #region OnGetRemove
+        //Disabled Discount
         public IActionResult OnGetRemove(long id)
         {
             _colleagueDiscountApplication.Remove(id);
             return RedirectToPage("./Index");
         }
 
+        #endregion
+
+        #region OnGetRestore
         public IActionResult OnGetRestore(long id)
         {
             _colleagueDiscountApplication.Restore(id);
             return RedirectToPage("./Index");
         }
+
+        #endregion
+
+        #region Delete
+        //Delete discount
+        public IActionResult OnGetDelete(long id)
+        {
+            var result= _colleagueDiscountApplication.Delete(id);
+            if (result.IsSucceddd)
+            {
+                return RedirectToPage("./Index");
+            }
+            TempData["Message"] = result.Message;
+
+            return RedirectToPage("./Index");
+
+        }
+        #endregion
+
+
     }
 }

@@ -3,7 +3,13 @@
 }
 @model List<ProductQueryModel>
 @{
-   
+     string categorySlug = Model
+         .GroupBy(x => x.CategorySlug)
+         .OrderByDescending(g => g.Count())         
+         .ThenByDescending(g => g.Max(p => p.Id))   
+         .Select(g => g.Key)
+         .FirstOrDefault();
+
 }
 
 <div class="row">
@@ -24,35 +30,42 @@
                         <li data-hours class="number_countdown">14</li>
                         <li>ساعت</li>
                     </ul>
-                   <ul class="text_countdown">
+                    <ul class="text_countdown">
                         <li data-minutes class="number_countdown">10</li>
                         <li>دقیقه</li>
                     </ul>
                     <ul class="text_countdown">
                         <li data-seconds class="number_countdown">0</li>
                         <li>ثانیه</li>
-                    </ul> 
+                    </ul>
                 </div>
             </header>
             <div class="product-carousel owl-carousel owl-theme">
                 @foreach (var product in Model)
                 {
                     <div class="item">
-                        <a href="single-product.html">
+                        <a asp-page="/Product" asp-route-id="@product.Slug">
                             <img src="~/FileUploade/@product.Picture" class="img-fluid" alt="@product.PictureAlt" title="@product.PictureTitle">
                         </a>
-                        <h2 class="product_title">
-                            <a href="single-product.html"> @product.Name  </a>
+                        <h2 style="text-align:center!important;" class="product_title">
+                            <a asp-page="/Product" asp-route-id="@product.Slug"> @product.Name  </a>
                         </h2>
                         <div class="price">
-                            <del><span>@product.Price<span>تومان</span></span></del>
-                            <span class="discount_badge">@product.DiscountRate%</span>
-                            <ins><span>@product.PriceWithDiscount<span>تومان</span></span></ins>
+                            @if (product.HasDiscount)
+                            {
+                                <del><span>@product.Price<span>تومان</span></span></del>
+                                <span class="discount_badge">@product.DiscountRate%</span>
+                                <ins><span>@product.PriceWithDiscount<span>تومان</span></span></ins>
+                            }
+                            else
+                            {
+                                <span class="amount">@product.Price<span>تومان</span> </span>
+                            }
                         </div>
                     </div>
-                }               
+                }
             </div>
-            <a href="#" class="view_more">مشاهده بیشتر</a>
+            <a asp-page="/ProductCategory" asp-route-id="@categorySlug" class="view_more">مشاهده بیشتر</a>
         </div>
     </div>
 </div>

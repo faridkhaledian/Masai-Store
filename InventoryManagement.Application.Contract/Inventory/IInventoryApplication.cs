@@ -5,7 +5,9 @@ namespace InventoryManagement.Application.Contract.Inventory
    public interface IInventoryApplication
     {
         OperationResult Create(CreateInventory command);
-        OperationResult Edit(EditInventory command);    
+        OperationResult Edit(EditInventory command);   
+        //Delete Inventory
+        OperationResult Delete(long id);    
         OperationResult Increase(IncreaseInventory command);
         OperationResult Reduce(ReduceInventory command); //user in inventory
         OperationResult Reduce(List<ReduceInventory> command); //Customer

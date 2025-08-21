@@ -17,12 +17,13 @@ namespace ServiceHost.Pages
             _productQuery = productQuery;
             _productCategoryQuery = productCategoryQuery;
         }
-
+        #region OnGet
         public void OnGet(string value)
         {
             Value = value;
             Products = _productQuery.Search(value);
             ListProductCategories = _productCategoryQuery.GetProductCategories();
         }
+        #endregion
     }
 }

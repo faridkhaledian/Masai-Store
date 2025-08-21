@@ -6,7 +6,10 @@ namespace ShopManagement.Application.Contracts.Slide
     {
         OperationResult Create(CreateSlide command);
         OperationResult Edit(EditSlide command);
+        //Disable slide
         OperationResult Remove(long id);
+        //Delete slide
+        OperationResult Delete(long id);
         OperationResult Restore(long id);
         EditSlide GetDetails(long id);
         List<SlideViewModel> GetList();

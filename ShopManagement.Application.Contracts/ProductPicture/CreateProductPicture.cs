@@ -12,13 +12,15 @@ namespace ShopManagement.Application.Contracts.ProductPicture
         public long ProductId { get; set; }
 
         [FileExtentionLimitation(new string[] { ".jpeg", ".jpg", ".png" }, ErrorMessage = ValidationMessages.InvalidFileFormat)]
-        [MaxFileSize(3 * 1024 * 1024, ErrorMessage = ValidationMessages.MaxFileSize)]
+        [MaxFileSizee(3 * 1024 * 1024, ErrorMessage = ValidationMessages.MaxFileSizee)]
         public IFormFile? Picture { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
+        [MaxLength(500,ErrorMessage =ValidationMessages.MaxFileSizee)]
         public string PictureAlt { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
+        [MaxLength(500, ErrorMessage = ValidationMessages.MaxFileSizee)]
         public string PictureTitle { get; set; }
 
         public List<ProductViewModel> Products { get; set; }

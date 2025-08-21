@@ -12,7 +12,7 @@ namespace _0_Framework.Application
         {
             _validExtentions = validExtentions;
         }
-
+        #region IsValid
         public override bool IsValid(object value)
         {
             var file = value as IFormFile;
@@ -20,10 +20,15 @@ namespace _0_Framework.Application
             var fileExtention = Path.GetExtension(file.FileName);
             return _validExtentions.Contains(fileExtention);
         }
+        #endregion
+
+        #region AddValidation
         public void AddValidation(ClientModelValidationContext context)
         {
-            context.Attributes.Add("data-val", "true");
+            //context.Attributes.Add("data-val", "true");
             context.Attributes.Add("data-val-FileExtentionLimitation", ErrorMessage);
         }
+        #endregion
+
     }
 }

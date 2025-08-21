@@ -5,6 +5,7 @@
 @{
 	Layout = "Shared/_AdminLayout";
 	ViewData["title"] = "مدیریت تخفیفات همکاران";
+    var message = TempData["Message"] as string;
 }
 <div class="row">
 	<div class="col-sm-12">
@@ -35,6 +36,14 @@
 		</div>
 	</div>
 </div>
+@if (!string.IsNullOrWhiteSpace(message))
+{
+	<div id="alertMessage" class="alert alert-danger alert-dismissible show d-flex justify-content-between align-items-center" role="alert">
+		@message
+		<button type="button" class="btn btn-sm btn btn-primary" data-bs-dismiss="alert" aria-label="Close" onclick="closeAlert()"> بستن</button>
+	</div>
+	message = null;
+}
 <div class="panel panel-primary filterable" id="ProductCategoriesDiv">
 	<div class="panel-heading">
 		<h3 class="panel-title">لیست تخفیفات همکاران (@Model.ColleagueDiscounts.Count)</h3>
@@ -64,6 +73,10 @@
 						<a class="btn btn-warning btn-custom waves-effect waves-light m-b-5"
 						   href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
 							<i class="fa fa-edit"></i> ویرایش
+						</a>
+						<a class="btn btn-danger btn-custom waves-effect waves-light m-b-5"
+						   asp-page="./Index" asp-page-handler="Delete" asp-route-id="@item.Id">
+							<i class="fa fa-trash-o"> </i> حذف
 						</a>
 						@if (item.IsRemoved)
 						{
@@ -95,5 +108,21 @@
 				autoClose: true
 			});
 		});
+	</script>
+	<script>
+		function closeAlert() {
+			var alertBox = document.getElementById("alertMessage");
+			if (alertBox) {
+				// Option 1: Instantly hide
+				// alertBox.style.display = "none";
+
+				// Option 2: Fade out effect
+				alertBox.style.transition = "opacity 0.5s ease";
+				alertBox.style.opacity = "0";
+				setTimeout(function () {
+					alertBox.style.display = "none";
+				}, 500);
+			}
+		}
 	</script>
 }

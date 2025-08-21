@@ -6,7 +6,7 @@ using ShopManagement.Infrastructure.EFCore;
 
 namespace DiscountManagement.Infrastructure.EFCore.Repository
 {
-    public class ColleagueDiscountRepository : RepositoryBase<long , ColleagueDiscount>  ,  IColleagueDiscountRepository
+    public class ColleagueDiscountRepository : RepositoryBase<long, ColleagueDiscount>, IColleagueDiscountRepository
     {
         private readonly DiscountContext _context;
         private readonly ShopContext _shopContext;
@@ -16,9 +16,10 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
             _context = context;
             _shopContext = shopContext;
         }
-
+        #region GetDetails
         public EditColleagueDiscount GetDetails(long id)
         {
+            //get discount with id
             return _context.ColleagueDiscounts.Select(x => new EditColleagueDiscount
             {
                 Id = x.Id,
@@ -26,24 +27,31 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
                 ProductId = x.ProductId
             }).FirstOrDefault(x => x.Id == id);
         }
+
+        #endregion
+        #region Search
         public List<ColleagueDiscountViewModel> Search(ColleagueDiscountSearchModel searchModel)
         {
             var products = _shopContext.Products.Select(x => new { x.Id, x.Name }).ToList();
+            //get all ColleagueDiscounts
             var query = _context.ColleagueDiscounts.Select(x => new ColleagueDiscountViewModel
             {
                 Id = x.Id,
                 CreationDate = x.CreationDate.ToFarsi(),
                 DiscountRate = x.DiscountRate,
-                IsRemoved=x.IsRemoved,
+                IsRemoved = x.IsRemoved,
                 ProductId = x.ProductId
             });
             if (searchModel.ProductId > 0)
                 query = query.Where(x => x.ProductId == searchModel.ProductId);
 
             var discounts = query.OrderByDescending(x => x.Id).ToList();
+            //Fill in the product field
             discounts.ForEach(discount =>
                 discount.Product = products.FirstOrDefault(x => x.Id == discount.ProductId)?.Name);
             return discounts;
         }
+
+        #endregion
     }
 }

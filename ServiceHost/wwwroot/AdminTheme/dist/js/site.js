@@ -38,11 +38,17 @@ $(document).ready(function () {
                 autoClose: true
             });
         });
+
+
     $(document).on("submit",
         'form[data-ajax="true"]',
         function (e) {
             e.preventDefault();
-            var form = $(this); //go get this form 
+            var form = $(this); //go get this form
+            // ✅ Client-side validation (requires jquery.validate + unobtrusive)
+            if (!form.valid()) {
+                return false; // stop submission
+            }
             const method = form.attr("method").toLocaleLowerCase(); //post
             const url = form.attr("action"); //asp-page="./Index" asp-page-handler="Create" and go create page
             var action = form.attr("data-action"); //Refresh
@@ -75,12 +81,15 @@ $(document).ready(function () {
             return false;
         });
 });
+
+
+
 function CallBackHandler(data, action, form) {
     switch (action) {
         case "Message":
             alert(data.Message);
             break;
-        case "Refresh":        
+        case "Refresh":
             if (data.isSucceddd) {
                 window.location.reload();
             } else {
@@ -174,6 +183,9 @@ function handleAjaxCall(method, url, data) {
 }
 jQuery.validator.addMethod("maxFileSize",
     function (value, element, params) {
+        if (element.files.length === 0) {
+            return true;
+        }
         var size = element.files[0].size;
         var maxSize = 3 * 1024 * 1024;
         if (size > maxSize)
@@ -183,7 +195,6 @@ jQuery.validator.addMethod("maxFileSize",
         }
     });
 jQuery.validator.unobtrusive.adapters.addBool("maxFileSize");
-
 
 
 

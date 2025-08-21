@@ -11,6 +11,7 @@ namespace _01_MasaiQuery.Query
         {
             _shopContext = shopContext;
         }
+        #region GetSlides
         public List<SlideQueryModel> GetSlides()
         {
             return _shopContext.Slides.Where(x => x.IsRemoved == false).Select(x => new SlideQueryModel
@@ -26,5 +27,7 @@ namespace _01_MasaiQuery.Query
 
             }).ToList();
         }
+
+        #endregion
     }
 }

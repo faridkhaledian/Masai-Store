@@ -24,6 +24,7 @@ namespace _01_MasaiQuery.Query
         {
             _shopContext = shopContext;
         }
+        #region GetProductCategories
         public List<ProductCategoryQueryModel> GetProductCategories()
         {
             return _shopContext.ProductCategories.Select(x => new ProductCategoryQueryModel
@@ -36,6 +37,9 @@ namespace _01_MasaiQuery.Query
                 Slug = x.Slug
             }).AsNoTracking().ToList();
         }
+
+        #endregion
+        #region GetProductCategoriesWithProducts
         public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()
         {
             var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId, x.UnitPrice }).ToList();
@@ -72,8 +76,9 @@ namespace _01_MasaiQuery.Query
             }
             return categories;
         }
-       
 
+        #endregion
+        #region GetProductCategoryWithProductsById
         public ProductCategoryQueryModel GetProductCategoryWithProductsBy(string slug)
         {
             var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId, x.UnitPrice }).ToList();
@@ -115,6 +120,9 @@ namespace _01_MasaiQuery.Query
             }
             return category;
         }
+
+        #endregion
+        #region MapProducts
         private static List<ProductQueryModel> MapProducts(List<Product> products)
         {
             return products.Select(product => new ProductQueryModel
@@ -128,5 +136,7 @@ namespace _01_MasaiQuery.Query
                 Slug = product.Slug
             }).ToList();
         }
+
+        #endregion
     }
 }

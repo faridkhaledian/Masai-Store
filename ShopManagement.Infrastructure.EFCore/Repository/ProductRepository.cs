@@ -14,9 +14,11 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         {
             _context = context;
         }
+        #region GetDetails
         public EditProduct GetDetails(long id)
         {
-         return _context.Products.Select(x => new EditProduct
+            //Getting a product with id
+            return _context.Products.Select(x => new EditProduct
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -30,34 +32,48 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 PictureTitle = x.PictureTitle,
                 ShortDescription = x.ShortDescription,
             }).FirstOrDefault(x => x.Id == id);
-         }
+        }
+
+        #endregion
+
+        #region GetProducts
         public List<ProductViewModel> GetProducts()
         {
-            return _context.Products.Select(x=> new ProductViewModel {
-             Id = x.Id,
-            Name = x.Name,
+            //get list of products
+            return _context.Products.Select(x => new ProductViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
             }).ToList();
         }
 
+        #endregion
+
+        #region GetProductWithCategory
         public Product GetProductWithCategory(long id)
         {
+            //get productWithCategory with id
             return _context.Products.Include(x => x.Category).SingleOrDefault(x => x.Id == id);
         }
 
+        #endregion
+        
+        #region Search
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
-         var query = _context.Products
-               .Include(x => x.Category)
-               .Select(x => new ProductViewModel
-               {
-                   Id = x.Id,
-                   Name = x.Name,
-                   Category = x.Category.Name,
-                   CategoryId = x.CategoryId,
-                   Code = x.Code,
-                   Picture = x.Picture,
-                   CreationDate = x.CreationDate.ToFarsi()
-               });
+            //get product with category
+            var query = _context.Products
+                  .Include(x => x.Category)
+                  .Select(x => new ProductViewModel
+                  {
+                      Id = x.Id,
+                      Name = x.Name,
+                      Category = x.Category.Name,
+                      CategoryId = x.CategoryId,
+                      Code = x.Code,
+                      Picture = x.Picture,
+                      CreationDate = x.CreationDate.ToFarsi()
+                  });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
                 query = query.Where(x => x.Name.Contains(searchModel.Name));
 
@@ -70,5 +86,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
 
             return query.OrderByDescending(x => x.Id).ToList();
         }
+
+        #endregion
+
     }
 }

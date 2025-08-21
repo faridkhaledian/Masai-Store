@@ -15,39 +15,70 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Slides
         {
             _slideApplication = slideApplication;
         }
+
+        #region OnGet
         public void OnGet()
         {
             Slides = _slideApplication.GetList();
-        }   
-
-        public IActionResult OnGetCreate() {
-            var command = new CreateSlide();
-            return Partial("./Create" ,command );
-            }
-        public JsonResult OnPostCreate(CreateSlide command) {
-            var result = _slideApplication.Create(command);
-        return new JsonResult(result);
         }
+        #endregion
+
+        #region OnGetCreate
+        public IActionResult OnGetCreate()
+        {
+            var command = new CreateSlide();
+            return Partial("./Create", command);
+        }
+
+        #endregion
+
+        #region OnPostCreate
+        public JsonResult OnPostCreate(CreateSlide command)
+        {
+            var result = _slideApplication.Create(command);
+            return new JsonResult(result);
+        }
+
+        #endregion
+
+        #region OnGetEdit
         public IActionResult OnGetEdit(long id)
         {
             var slide = _slideApplication.GetDetails(id);
-            return Partial("Edit" , slide);
+            return Partial("Edit", slide);
         }
-         public JsonResult OnPostEdit(EditSlide command)
+
+        #endregion
+
+        #region OnPostEdit
+        public JsonResult OnPostEdit(EditSlide command)
         {
+            //if (ModelState.IsValid)
+            //{
+            //}
             var result = _slideApplication.Edit(command);
             return new JsonResult(result);
         }
-        public IActionResult OnGetRemove(long id) { 
-        var result = _slideApplication.Remove(id);
+
+        #endregion
+
+        #region OnGetRemove
+        public IActionResult OnGetRemove(long id)
+        {
+            var result = _slideApplication.Remove(id);
             if (result.IsSucceddd)
             {
                 return RedirectToPage("./Index");
             }
-                Message=result.Message;
+            Message = result.Message;
             return RedirectToPage("./Index");
         }
-        public IActionResult OnGetRestore(long id) {
+
+        #endregion
+
+        #region OnGetRestore
+        public IActionResult OnGetRestore(long id)
+        {
             var result = _slideApplication.Restore(id);
             if (result.IsSucceddd)
             {
@@ -56,5 +87,20 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Slides
             Message = result.Message;
             return RedirectToPage("./Index");
         }
+        #endregion
+
+        #region Delete
+        public IActionResult OnGetDelete(long id)
+        {
+            var result = _slideApplication.Delete(id);
+            if (result.IsSucceddd)
+            {
+                return RedirectToPage("./Index");
+            }
+            TempData["Message"] = result.Message;
+            return RedirectToPage("./Index");
+        }
+        #endregion
+
     }
 }

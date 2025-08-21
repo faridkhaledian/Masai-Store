@@ -11,49 +11,74 @@ namespace InventoryManagement.Application
         {
             _inventoryRepository = inventoryRepository;
         }
+
+        #region  Create
         public OperationResult Create(CreateInventory command)
         {
             var operation = new OperationResult();
             if (_inventoryRepository.Exists(x => x.ProductId == command.ProductId))
                 return operation.Failed(ApplicationMessage.DuplicatedRecord);
-
-            var inventory = new Inventory(command.ProductId , command.UnitPrice);
+            //create inventory
+            var inventory = new Inventory(command.ProductId, command.UnitPrice);
             _inventoryRepository.Create(inventory);
             _inventoryRepository.SaveChange();
             return operation.Succedded();
         }
+
+        #endregion
+        
+        #region Edit
         public OperationResult Edit(EditInventory command)
         {
             var operation = new OperationResult();
-            var inventory=_inventoryRepository.Get(command.Id);
-           if (inventory == null)
+            var inventory = _inventoryRepository.Get(command.Id);
+            if (inventory == null)
                 return operation.Failed(ApplicationMessage.RecordNotFound);
-           if(_inventoryRepository.Exists(x=>x.ProductId == command.ProductId && x.Id !=command.Id))
+
+            if (_inventoryRepository.Exists(x => x.ProductId == command.ProductId && x.Id != command.Id))
                 return operation.Failed(ApplicationMessage.DuplicatedRecord);
-           inventory.Edit(command.ProductId, command.UnitPrice);
+            //Edit command inventory
+            inventory.Edit(command.ProductId, command.UnitPrice);
             _inventoryRepository.SaveChange();
             return operation.Succedded();
         }
+
+        #endregion
+        
+        #region GetDetails
         public EditInventory GetDetails(long id)
         {
-           return _inventoryRepository.GetDetails(id);
+            return _inventoryRepository.GetDetails(id);
         }
+
+        #endregion
+        
+        #region GetOperationLog
         public List<InventoryOperationViewModel> GetOperationLog(long inventoryId)
         {
-          return _inventoryRepository.GetOperationLog(inventoryId);
+            return _inventoryRepository.GetOperationLog(inventoryId);
         }
+
+        #endregion
+        
+        #region Increase
         public OperationResult Increase(IncreaseInventory command)
         {
             var operation = new OperationResult();
-            var inventory=_inventoryRepository.Get(command.InventoryId);
-            if(inventory == null)   
+            var inventory = _inventoryRepository.Get(command.InventoryId);
+            if (inventory == null)
                 operation.Failed(ApplicationMessage.RecordNotFound);
 
             const long OperatorId = 1;
+            //Increase the number of product
             inventory.Increase(command.Count, OperatorId, command.Description);
             _inventoryRepository.SaveChange();
             return operation.Succedded();
         }
+
+        #endregion
+        
+        #region Reduce
         public OperationResult Reduce(ReduceInventory command)
         {
             var operation = new OperationResult();
@@ -62,25 +87,52 @@ namespace InventoryManagement.Application
                 operation.Failed(ApplicationMessage.RecordNotFound);
 
             const long operatorId = 1;
-            inventory.Reduce(command.Count, operatorId, command.Description ,0);
+            //Reduce the number of product for one product
+            inventory.Reduce(command.Count, operatorId, command.Description, 0);
             _inventoryRepository.SaveChange();
             return operation.Succedded();
         }
+
+        #endregion
+        
+        #region Reduce
         public OperationResult Reduce(List<ReduceInventory> command)
         {
             var operation = new OperationResult();
             const long operatorId = 1;
+            //Reduce the number of product for list<product>
             foreach (var item in command)
             {
                 var inventory = _inventoryRepository.GetBy(item.ProductId);
-                inventory.Reduce(item.Count , operatorId,item.Description , item.OrderId );
+                inventory.Reduce(item.Count, operatorId, item.Description, item.OrderId);
             }
             _inventoryRepository.SaveChange();
             return operation.Succedded();
         }
+
+        #endregion
+        
+        #region Search
         public List<InventoryViewModel> Search(InventorySearchModel searchModel)
         {
             return _inventoryRepository.Search(searchModel);
         }
+
+        #endregion
+
+        #region Delete
+        public OperationResult Delete(long id)
+        {
+            var operation = new OperationResult();
+            if (_inventoryRepository.Exists(x=> x.Id == id) )
+            {
+                _inventoryRepository.Delete(id);
+                _inventoryRepository.SaveChange();
+                return operation.Succedded();   
+            }
+            return operation.Failed(ApplicationMessage.RecordNotFound);
+        }
+        #endregion
+
     }
 }

@@ -8201,7 +8201,8 @@ color: #2ec4b1;
     border-radius: 10px;
 }
 .product-gallery .main_img_gallery{
-    width:100%;border-radius: 13px;
+    width:77%;
+    border-radius: 7px;
 }
 /*.carousel-indicators{
     right:auto;

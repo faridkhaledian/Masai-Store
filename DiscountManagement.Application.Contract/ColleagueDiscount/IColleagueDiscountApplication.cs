@@ -6,6 +6,7 @@ namespace DiscountManagement.Application.Contract.ColleagueDiscount
     {
         OperationResult Define(DefineColleagueDiscount command);
         OperationResult Edit(EditColleagueDiscount command);
+        OperationResult Delete(long id);
         OperationResult Remove(long id);
         OperationResult Restore(long id);
         EditColleagueDiscount GetDetails(long id);

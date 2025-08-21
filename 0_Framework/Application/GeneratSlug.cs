@@ -6,6 +6,7 @@ namespace _0_Framework.Application
 {
     public static class GeneratSlug
     {
+        #region slugify
         public static string slugify(this string phrase)
         {
             var s = phrase.RemoveDiacritics().ToLower();
@@ -18,6 +19,8 @@ namespace _0_Framework.Application
             return s.ToLower();
         }
 
+        #endregion
+        #region RemoveDiacritics
         public static string RemoveDiacritics(this string text)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -37,5 +40,7 @@ namespace _0_Framework.Application
 
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
+
+        #endregion
     }
 }

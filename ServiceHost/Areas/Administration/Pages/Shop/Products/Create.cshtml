@@ -56,6 +56,7 @@
 				<div class="form-group">
 					<label asp-for="PictureAlt" class="control-label">Alt</label>
 					<input type="text" class="form-control" asp-for="PictureAlt">
+					<span asp-validation-for="PictureAlt" class="error"></span>
 				</div>
 			</div>
 		</div>
@@ -64,6 +65,7 @@
 				<div class="form-group">
 					<label asp-for="PictureTitle" class="control-label">عنوان</label>
 					<input type="text" class="form-control" asp-for="PictureTitle">
+					<span asp-validation-for="PictureTitle" class="error"></span>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -80,7 +82,8 @@
 					<label asp-for="Description" class="control-label">توضیحات</label>
 					<textarea class="form-control autogrow" asp-for="Description"
 							  style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
-				</div>
+					<span asp-validation-for="Description" class="error"></span>
+						  </div>
 			</div>
 		</div>
 		<div class="row">

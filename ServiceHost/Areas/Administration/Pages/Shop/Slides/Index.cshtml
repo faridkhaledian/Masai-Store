@@ -3,84 +3,121 @@
 @{
 }
 @{
-	Layout = "Shared/_AdminLayout";
-	ViewData["title"] = "مدیریت اسلاید";
+    Layout = "Shared/_AdminLayout";
+    ViewData["title"] = "مدیریت اسلاید";
+    var message = TempData["Message"] as string;
 }
 <div class="row">
-	<div class="col-sm-12">
-		<h4 class="page-title pull-right">@ViewData["title"]</h4>
-		<p class="pull-left">
-			<a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")"><span class="fa fa-plus "></span>ایجاد اسلاید جدید</a>
-		</p>
-	</div>
+    <div class="col-sm-12">
+        <h4 class="page-title pull-right">@ViewData["title"]</h4>
+        <p class="pull-left">
+            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")"><span class="fa fa-plus "></span>ایجاد اسلاید جدید</a>
+        </p>
+    </div>
 </div>
+@if (!string.IsNullOrWhiteSpace(message))
+{
+    <div id="alertMessage" class="alert alert-danger alert-dismissible show d-flex justify-content-between align-items-center" role="alert">
+        @message
+        <button type="button" class="btn btn-sm btn btn-primary" data-bs-dismiss="alert" aria-label="Close" onclick="closeAlert()"> بستن</button>
+    </div>
+    message = null;
+}
 <div class="panel panel-primary filterable" id="ProductCategoriesDiv">
-	<div class="panel-heading">
-		<h3 class="panel-title">لیست اسلایدها(@Model.Slides.Count)</h3>
-		<div class="pull-left">
-			<button class="btn btn-default btn-xs btn-filter"><span class="fa fa-filter"></span> فیلتر</button>
-		</div>
-	</div>
-	<table class="table" id="datatable">
-		<thead>
-			<tr class="filters">
-				<th><input type="text" class="form-control" placeholder="#" disabled></th>
-				<th><input type="text" class="form-control" placeholder="عکس" disabled></th>
-				<th><input type="text" class="form-control" placeholder="سرتیتر" disabled></th>
-				<th><input type="text" class="form-control" placeholder="عنوان" disabled></th>
-				<th><input type="text" class="form-control" placeholder="وضعیت" disabled></th>
-				<th><input type="text" class="form-control" placeholder="تاریخ تولید" disabled></th>
-				<th><input type="text" class="form-control" placeholder="عملیات" disabled></th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var item in Model.Slides)
-			{
-				<tr>
-					<td>@item.Id</td>
-					<td>
-						<img src="~/FileUploade/@item.Picture" style="width: 70px; height: 70px" />
-					</td>
-					<td>@item.Heading</td>
-					<td>@item.Title</td>
-					<td class="text-center">
-						@if (!item.IsRemoved)
-						{
-							<i class="fa fa-check fa-3x text-success"></i>
-						}
-						else
-						{
-							<i class="fa fa-remove fa-3x text-danger"></i>
-						}
-					</td>
-					<td>@item.CreationDate</td>
-					<td>
-						<a class="btn btn-warning btn-custom waves-effect waves-light m-b-5"
-						   href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
-							<i class="fa fa-edit"></i> ویرایش
-						</a>
+    <div class="panel-heading">
+        <h3 class="panel-title">لیست اسلایدها(@Model.Slides.Count)</h3>
+        <div class="pull-left">
+            <button class="btn btn-default btn-xs btn-filter"><span class="fa fa-filter"></span> فیلتر</button>
+        </div>
+    </div>
+    <table class="table" id="datatable">
+        <thead>
+            <tr class="filters">
+                <th><input type="text" class="form-control" placeholder="#" disabled></th>
+                <th><input type="text" class="form-control" placeholder="عکس" disabled></th>
+                <th><input type="text" class="form-control" placeholder="سرتیتر" disabled></th>
+                <th><input type="text" class="form-control" placeholder="عنوان" disabled></th>
+                <th><input type="text" class="form-control" placeholder="وضعیت" disabled></th>
+                <th><input type="text" class="form-control" placeholder="تاریخ تولید" disabled></th>
+                <th><input type="text" class="form-control" placeholder="عملیات" disabled></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Slides)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>
+                        <img src="~/FileUploade/@item.Picture" style="width: 70px; height: 70px" />
+                    </td>
+                    <td>@item.Heading</td>
+                    <td>@item.Title</td>
+                    <td class="text-center">
+                        @if (!item.IsRemoved)
+                        {
+                            <i class="fa fa-check fa-3x text-success"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-remove fa-3x text-danger"></i>
+                        }
+                    </td>
+                    <td>@item.CreationDate</td>
+                    <td>
+                        <a class="btn btn-warning btn-custom waves-effect waves-light m-1 d-inline-block"
+                           href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
+                            <i class="fa fa-edit"></i> ویرایش
+                        </a>
+                        <a class="btn btn-danger btn-custom waves-effect waves-light m-1 d-inline-block"
+                           asp-page="./Index" asp-page-handler="Delete" asp-route-id="@item.Id">
+                            <i class="fa fa-trash-o"></i> حذف
+                        </a>
+                        @if (!item.IsRemoved)
+                        {
+                            <a asp-page="./Index" asp-page-handler="Remove"
+                               asp-route-id="@item.Id"
+                               class="btn btn-danger btn-custom waves-effect waves-light m-1 d-inline-block">
+                                غیرفعال
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-page="./Index" asp-page-handler="Restore"
+                               asp-route-id="@item.Id"
+                               class="btn btn-success btn-custom waves-effect waves-light m-1 d-inline-block">
+                                فعال سازی
+                            </a>
+                        }
+                    </td>
 
-						@if (!item.IsRemoved)
-						{
-							<a asp-page="./Index" asp-page-handler="Remove"
-							   asp-route-id="@item.Id" class="btn btn-danger btn-custom waves-effect waves-light m-b-5"> حذف  </a>
-						}
-						else
-						{
-							<a asp-page="./Index" asp-page-handler="Restore"
-							   asp-route-id="@item.Id" class="btn btn-success btn-custom waves-effect waves-light m-b-5"> فعال سازی  </a>
-						}
-					</td>
-				</tr>
-			}
-	</table>
+
+
+                </tr>
+            }
+    </table>
 </div>
 @section Scripts {
-	<script src="~/AdminTheme/dist/js/site.js"></script>
-	<script type="text/javascript">
+    <script src="~/AdminTheme/dist/js/site.js"></script>
+    <script type="text/javascript">
 
-		$(document).ready(function () {
-			$('#datatable').dataTable();
-		});
-	</script>
+        $(document).ready(function () {
+            $('#datatable').dataTable();
+        });
+    </script>
+    <script>
+        function closeAlert() {
+            var alertBox = document.getElementById("alertMessage");
+            if (alertBox) {
+                // Option 1: Instantly hide
+                // alertBox.style.display = "none";
+
+                // Option 2: Fade out effect
+                alertBox.style.transition = "opacity 0.5s ease";
+                alertBox.style.opacity = "0";
+                setTimeout(function () {
+                    alertBox.style.display = "none";
+                }, 500);
+            }
+        }
+    </script>
 }
