@@ -104,6 +104,10 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
         public JsonResult OnPostReduce(ReduceInventory command)
         {
             var result = _inventoryApplication.Reduce(command);
+            if (!result.IsSucceddd)
+            {
+                return new JsonResult(result);
+            }
             return new JsonResult(result);
         }
         #endregion

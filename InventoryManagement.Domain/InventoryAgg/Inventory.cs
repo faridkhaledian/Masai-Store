@@ -33,12 +33,16 @@ namespace InventoryManagement.Domain.InventoryAgg
             Operations.Add(operation);
             InStock= currentCount > 0;
         }
-        public void Reduce(long count , long operatorId , string description , long orderId)
+        public bool Reduce(long count , long operatorId , string description , long orderId)
         {
             var currentCount=CalculateCurrentCount()-count;
-            var operation = new InventoryOperation(false , count , operatorId , currentCount , description , orderId , Id);
-            Operations.Add(operation );
-            InStock= currentCount > 0;
+            if (currentCount < 0)
+                return false;
+               
+            var operation = new InventoryOperation(false, count, operatorId, currentCount, description, orderId, Id);
+                Operations.Add(operation);
+                InStock = currentCount > 0;
+            return true;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace InventoryManagement.Application
         }
 
         #endregion
-        
+
         #region Edit
         public OperationResult Edit(EditInventory command)
         {
@@ -44,7 +44,7 @@ namespace InventoryManagement.Application
         }
 
         #endregion
-        
+
         #region GetDetails
         public EditInventory GetDetails(long id)
         {
@@ -52,7 +52,7 @@ namespace InventoryManagement.Application
         }
 
         #endregion
-        
+
         #region GetOperationLog
         public List<InventoryOperationViewModel> GetOperationLog(long inventoryId)
         {
@@ -60,7 +60,7 @@ namespace InventoryManagement.Application
         }
 
         #endregion
-        
+
         #region Increase
         public OperationResult Increase(IncreaseInventory command)
         {
@@ -77,7 +77,7 @@ namespace InventoryManagement.Application
         }
 
         #endregion
-        
+
         #region Reduce
         public OperationResult Reduce(ReduceInventory command)
         {
@@ -88,30 +88,42 @@ namespace InventoryManagement.Application
 
             const long operatorId = 1;
             //Reduce the number of product for one product
-            inventory.Reduce(command.Count, operatorId, command.Description, 0);
+            var success = inventory.Reduce(command.Count, operatorId, command.Description, 0);
+            if (!success)
+               return operation.Failed(ApplicationMessage.RecordNotNegative);
+
             _inventoryRepository.SaveChange();
             return operation.Succedded();
+
         }
 
         #endregion
-        
+
         #region Reduce
         public OperationResult Reduce(List<ReduceInventory> command)
         {
             var operation = new OperationResult();
-            const long operatorId = 1;
-            //Reduce the number of product for list<product>
-            foreach (var item in command)
+            try
             {
-                var inventory = _inventoryRepository.GetBy(item.ProductId);
-                inventory.Reduce(item.Count, operatorId, item.Description, item.OrderId);
+                const long operatorId = 1;
+                //Reduce the number of product for list<product>
+                foreach (var item in command)
+                {
+                    var inventory = _inventoryRepository.GetBy(item.ProductId);
+                    inventory.Reduce(item.Count, operatorId, item.Description, item.OrderId);
+                }
+                _inventoryRepository.SaveChange();
+                return operation.Succedded();
+
             }
-            _inventoryRepository.SaveChange();
-            return operation.Succedded();
+            catch (InvalidOperationException ex)
+            {
+                return operation.Failed(ex.Message);// Pass error back to client
+            }
         }
 
         #endregion
-        
+
         #region Search
         public List<InventoryViewModel> Search(InventorySearchModel searchModel)
         {
@@ -124,11 +136,11 @@ namespace InventoryManagement.Application
         public OperationResult Delete(long id)
         {
             var operation = new OperationResult();
-            if (_inventoryRepository.Exists(x=> x.Id == id) )
+            if (_inventoryRepository.Exists(x => x.Id == id))
             {
                 _inventoryRepository.Delete(id);
                 _inventoryRepository.SaveChange();
-                return operation.Succedded();   
+                return operation.Succedded();
             }
             return operation.Failed(ApplicationMessage.RecordNotFound);
         }
