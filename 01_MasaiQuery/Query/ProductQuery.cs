@@ -1,25 +1,29 @@
 ﻿using _0_Framework.Application;
-using _01_LampshadeQuery.Contracts.Product;
+using _01_MasaiQuery.Contracts.Comment;
+using _01_MasaiQuery.Contracts.Product;
 using _01_MasaiQuery.Contracts.ProductPicture;
+using CommentManagement.Infrastructure.EFCore;
 using DiscountManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EfCore;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EFCore;
 
-namespace _01_LampshadeQuery.Query
+namespace _01_MasaiQuery.Query
 {
     public class ProductQuery : IProductQuery
     {
         private readonly InventoryContext _inventoryContext;
         private readonly ShopContext _shopContext;
         private readonly DiscountContext _discountContext;
+        private readonly CommentContext _commentContext;
 
-        public ProductQuery(InventoryContext inventoryContext, ShopContext shopContext, DiscountContext discountContext)
+        public ProductQuery(InventoryContext inventoryContext, ShopContext shopContext, DiscountContext discountContext, CommentContext commentContext)
         {
             _inventoryContext = inventoryContext;
             _shopContext = shopContext;
             _discountContext = discountContext;
+            _commentContext = commentContext;
         }
 
         #region GetProductDetails
@@ -30,7 +34,7 @@ namespace _01_LampshadeQuery.Query
             var discounts = _discountContext.CustomerDiscounts
                 .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
                 .Select(x => new { x.DiscountRate, x.ProducId, x.EndDate }).ToList();
-
+            //Get all products along with categories and photos of each product
             var product = _shopContext.Products
                 .Include(x => x.Category)
                 .Include(x => x.ProductPictures)
@@ -54,20 +58,26 @@ namespace _01_LampshadeQuery.Query
 
             if (product == null)
                 return new ProductQueryModel();
-
-
-            //product.Comments = _commentContext.Comments
-            //    .Where(x => x.Type == CommentType.Product)
-            //    .Where(x => !x.IsCanceled)
-            //    .Where(x => x.IsConfirmed)
-            //    .Where(x => x.OwnerRecordId == product.Id)
-            //    .Select(x => new CommentQueryModel
-            //    {
-            //        Id = x.Id,
-            //        Message = x.Message,
-            //        Name = x.Name,
-            //    }).OrderByDescending(x => x.Id).ToList();
-
+            //set comments for each product
+            var comments =product.Comments = _commentContext.Comments
+                .Where(x => x.Type == CommentType.Product)
+                .Where(x => !x.IsCanceled)
+                .Where(x => x.IsConfirmed)
+                .Where(x => x.OwnerRecordId == product.Id)
+                .Select(x => new CommentQueryModel
+                {
+                    Id = x.Id,
+                    Message = x.Message,
+                    CreationDate=x.CreationDate.ToFarsi(),
+                    ParentId = x.ParentId,
+                    Name = x.Name,
+                }).OrderByDescending(x => x.Id).ToList();
+            foreach (var comment in comments)
+            {
+                if (comment.ParentId > 0)
+                    comment.parentName = comments.FirstOrDefault(x => x.Id == comment.ParentId)?.Name;
+            }
+           // Setting discounts and stocking
             var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
             if (productInventory != null)
             {
@@ -78,6 +88,7 @@ namespace _01_LampshadeQuery.Query
                 var discount = discounts.FirstOrDefault(x => x.ProducId == product.Id);
                 if (discount != null)
                 {
+                    
                     var discountRate = discount.DiscountRate;
                     product.DiscountRate = discountRate;
                     product.DiscountExpireDate = discount.EndDate.ToDiscountFormat();
@@ -91,6 +102,7 @@ namespace _01_LampshadeQuery.Query
         }
 
         #endregion
+
         #region MapProductPictures
         private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)
         {
@@ -105,6 +117,7 @@ namespace _01_LampshadeQuery.Query
         }
 
         #endregion
+        
         #region AmazingProducts
         public List<ProductQueryModel> AmazingProducts()
         {
@@ -150,6 +163,7 @@ namespace _01_LampshadeQuery.Query
         }
 
         #endregion
+        
         #region GetLatestArrivals
         public List<ProductQueryModel> GetLatestArrivals()
         {
@@ -192,6 +206,7 @@ namespace _01_LampshadeQuery.Query
         }
 
         #endregion
+        
         #region Search
         public List<ProductQueryModel> Search(string value)
         {

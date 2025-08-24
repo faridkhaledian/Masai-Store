@@ -4538,9 +4538,9 @@ ul.gallery-options li:hover .tooltip-option {
 
 .comments_form ol.comment-list li .comment-body {
     font-size: 14px;
-    margin-top: 50px;
-    padding: 20px 40px 20px 20px;
-    line-height: 30px;
+    margin-top: 25px;
+    padding: 5px 30px 5px 20px;
+    line-height: 25px;
     position: relative;
 }
 
@@ -4592,8 +4592,8 @@ ul.gallery-options li:hover .tooltip-option {
    
     right: -70px;
     left: auto;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border: none;
     border-radius: 50%;
     padding: 0;

@@ -1,6 +1,5 @@
 using _01_MasaiQuery.Contracts.ProductCategory;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
 
 namespace ServiceHost.Pages
 {

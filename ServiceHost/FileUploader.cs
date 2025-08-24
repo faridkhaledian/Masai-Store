@@ -1,8 +1,4 @@
 ﻿using _0_Framework.Application;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.IO;
 
 namespace ServiceHost
 {

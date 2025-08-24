@@ -2,7 +2,7 @@
 
 namespace ShopManagement.Application.Contracts.Slide
 {
-  public  interface ISlideApplication
+    public interface ISlideApplication
     {
         OperationResult Create(CreateSlide command);
         OperationResult Edit(EditSlide command);
@@ -13,5 +13,5 @@ namespace ShopManagement.Application.Contracts.Slide
         OperationResult Restore(long id);
         EditSlide GetDetails(long id);
         List<SlideViewModel> GetList();
-  }
+    }
 }

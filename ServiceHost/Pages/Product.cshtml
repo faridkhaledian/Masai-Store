@@ -3,6 +3,8 @@
 @{
     Layout = "Shared/_Layout";
     ViewData["Title"] = Model.Product.Name;
+    var imgIndex = 1;
+
 }
 <main class="single-product default">
     <div class="container">
@@ -189,7 +191,7 @@
                                                 </div>
 
                                             }
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -205,7 +207,7 @@
                                         برای کالاهای گروه موبایل، امکان برگشت کالا به دلیل انصراف از خرید تنها در صورتی مورد قبول است که کالا بدون هیچگونه استفاده و با تمامی قطعات، متعلقات و بسته‌بندی‌های اولیه خود بازگردانده شود. لازم به ذکر است که برای هر کالای موبایل، ضمانت رجیستری صادر می‌شود. در صورت بروز اشکال در ضمانت رجیستری، پس از انقضای مدت ۳۰ روزه، کالا می‌تواند بازگردانده شود.
                                     </p>
                                 </div>
-                               
+
                             </div>
 
 
@@ -278,65 +280,76 @@
                                     <div class="tab-pane" id="comments" role="tabpanel" aria-expanded="false">
 
                                         <header class="card-header">
-                                            <h3 class="card-title"><span>دیدگاه های دیگر کاربران</span></h3>
+                                            <h3 class="card-title"><span>دیدگاه های دیگر کاربران (@Model.Product.Comments.Count) </span></h3>
                                         </header>
                                         <div class="comments_form default">
                                             <ol class="comment-list">
-                                                <!-- #comment-## -->
-                                                <li>
-                                                    <div class="comment-body">
-                                                        <div class="comment-author">
-                                                            <img alt="" src="assets/img/profile/1.png" class="avatar"><span class="star4">4.3</span><div class="text-h5">عالی وشیک</div>
-                                                        </div>
+                                                <ul id="commentList">
 
-                                                        <p>محصول بسیار خوبی است. صفحه‌نمایش با کیفیت فوق‌العاده، دوربین‌های با کیفیت و روانی کارکرد دستگاه همگی از ویژگی‌های مثبت این محصول هستند.</p>
-                                                        <ul class="commentul">
-                                                            <li>
-                                                                25 اردیبهشت 1402
-
-
-                                                            </li>
-                                                            <li>
-                                                                رضا صبوری
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="comment-body">
-                                                        <div class="comment-author">
-                                                            <img alt="" src="assets/img/profile/2.png" class="avatar"><span class="star3">3.2</span><div class="text-h5">جنس ضعیف</div>
-                                                        </div>
-
-                                                        <p>
-                                                            اینقد قیمتش زیاد هست که نمیشه سمتش رفت، خریدم ولی پشیمونم، بنظر من نخرید، نوکیا 1100 از این بهتره، خیلی کار باهاش هم دشوار هست.
-                                                        </p>
-                                                        <ul class="commentul">
-                                                            <li>
-                                                                30 اردیبهشت 1402
-
-
-                                                            </li>
-                                                            <li>
-                                                                محمود صفایی
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
+                                                    @foreach (var comment in Model.Product.Comments)
+                                                    {
+                                                        <li id="comment-@comment.Id">
+                                                            <div class="comment-body">
+                                                                <div class="comment-author">
+                                                                    <img alt="@Model.Product.PictureAlt"
+                                                                         title="@Model.Product.PictureTitle"
+                                                                         src="@Url.Content("~/Theme/assets/img/profile/" + imgIndex + ".png")"
+                                                                         class="avatar" />
+                                                                    <div class="text-h5">
+                                                                        <span class="reply-btn">
+                                                                            <a href="javascript:void(0);" onclick="setReply(@comment.Id)">
+                                                                                <i class="fas fa-reply"></i> پاسخ
+                                                                            </a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <p>@comment.Message</p>
+                                                                <ul class="commentul">
+                                                                    <li>@comment.CreationDate</li>
+                                                                    <li>@comment.Name</li>
+                                                                    @if (comment.ParentId > 0)
+                                                                    {
+                                                                        <li>
+                                                                            <span>در پاسخ به: </span><a href="#comment-@comment.ParentId">@comment.parentName</a>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                       imgIndex++;
+                                                        if (imgIndex > 4) { imgIndex = 1; }
+                                                    }
+                                                </ul>
                                             </ol>
                                         </div>
-
                                     </div>
                                     <div class="tab-pane form-comment" id="comments_questions" role="tabpanel" aria-expanded="false">
                                         <header class="card-header">
                                             <h3 class="card-title"><span>ارسال نظر و پرسش  </span></h3>
                                         </header>
-
-                                        <form action="#" class="comment">
-                                            <textarea class="form-control" placeholder="متن نظر و پرسش" rows="4"></textarea>
-                                            <button class="btn btn-main-masai">ارسال برای تایید</button>
-                                        </form>
-
+                                        <div class="comments_form" id="postComment">
+                                            <form method="post">
+                                                <div class="rating-form row">
+                                                    <div class="col-md-4 col-12 form-group">
+                                                        <label for="name">نام:</label>
+                                                        <textarea id="name" class="form-control" name="name" type="text" placeholder="مثال: علی علوی" rows="1"></textarea>
+                                                    </div>
+                                                    <div class="col-md-4 col-12 form-group">
+                                                        <label for="email">ایمیل:</label>
+                                                        <textarea class="form-control" id="email" placeholder="مثال: contact@atriya.com" name="email" type="text" rows="1"></textarea>
+                                                    </div>
+                                                    <div class="col-md-4 col-12 form-group">
+                                                        <label for="Website">وبسایت:</label>
+                                                        <textarea class="form-control" id="Website" placeholder="مثال: Masai2025.ir" name="Website" type="text" rows="1"></textarea>
+                                                    </div>
+                                                    <input type="hidden" name="ownerRecordId" value="@Model.Product.Id" />
+                                                    <input type="hidden" name="parentId" id="commentParentId" value="" />
+                                                    <input type="hidden" name="productSlug" value="@Model.Product.Slug" />
+                                                </div>
+                                                <textarea class="form-control" name="message" id="message" placeholder="متن نظر و پرسش" rows="3"></textarea>
+                                                <button class="btn btn-main-masai" type="submit">ارسال برای تایید</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -347,3 +360,26 @@
         </div>
     </div>
 </main>
+
+@section Product {
+
+    <script>
+                function setReply(commentId) {
+            // مقداردهی parentId
+            $("#commentParentId").val(commentId);
+
+            // فعال کردن تب "پرسش و نظر"
+            var tabTrigger = document.querySelector('a[href="#comments_questions"]');
+            if (tabTrigger) {
+                $(tabTrigger).tab("show"); }
+
+            // کمی صبر کن تا تب باز بشه بعد اسکرول کن
+            setTimeout(() => {
+                document.getElementById("postComment").scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }, 300);
+        }
+    </script>
+}

@@ -2,7 +2,7 @@
 
 namespace DiscountManagement.Application.Contract.CustomerDiscount
 {
-   public interface ICustomerDiscountApplication
+    public interface ICustomerDiscountApplication
     {
         OperationResult Define(DefineCustomerDiscount command);
         OperationResult Edit(EditCustomerDiscount command);

@@ -1,8 +1,9 @@
-﻿using _01_MasaiQuery.Contracts.ProductPicture;
+﻿using _01_MasaiQuery.Contracts.Comment;
+using _01_MasaiQuery.Contracts.ProductPicture;
 
-namespace _01_LampshadeQuery.Contracts.Product
+namespace _01_MasaiQuery.Contracts.Product
 {
-  public  class ProductQueryModel
+    public class ProductQueryModel
     {
         public long Id { get; set; }
         public string Picture { get; set; }
@@ -24,7 +25,7 @@ namespace _01_LampshadeQuery.Contracts.Product
         public string DiscountExpireDate { get; set; }
         public string CategorySlug { get; set; }
         public bool IsInStock { get; set; }
-        //public List<CommentQueryModel> Comments { get; set; }
+        public List<CommentQueryModel> Comments { get; set; }
         public List<ProductPictureQueryModel> Pictures { get; set; }
     }
 }

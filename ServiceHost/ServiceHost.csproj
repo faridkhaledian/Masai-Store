@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+	  <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -2616,6 +2617,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\01_MasaiQuery\01_MasaiQuery.csproj" />
+    <ProjectReference Include="..\CommentManagement.Infrastructure\CommentManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\DiscountManagement.Configuration\DiscountManagement.Configuration.csproj" />
     <ProjectReference Include="..\InventoryManagement.Infrastructure.Configuration\InventoryManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\InventoryManagement.Infrastructure.EfCore\InventoryManagement.Infrastructure.EfCore.csproj" />
@@ -2623,6 +2625,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="8.6.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

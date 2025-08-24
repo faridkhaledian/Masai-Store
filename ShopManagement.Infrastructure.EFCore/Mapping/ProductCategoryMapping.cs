@@ -6,7 +6,7 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
 {
     public class ProductCategoryMapping : IEntityTypeConfiguration<ProductCategory>
     {
-        public void Configure( EntityTypeBuilder<ProductCategory> builder)
+        public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
             builder.ToTable("ProductCategories");
             builder.HasKey(x => x.Id);

@@ -44,7 +44,7 @@ namespace DiscountManagement.Application
             if (_customerDiscountRepository.Exists(x => x.ProducId == command.ProducId &&
             x.DiscountRate == command.DiscountRate && x.Id != command.Id))
                 return operation.Failed(ApplicationMessage.DuplicatedRecord);
-            
+
             var startDate = command.StartDate.ToGeorgianDateTime();
             var endDate = command.EndDate.ToGeorgianDateTime();
             //edit command discount
@@ -75,8 +75,8 @@ namespace DiscountManagement.Application
         //Delete physical
         public OperationResult Delete(long id)
         {
-            var operation= new OperationResult();
-            if (_customerDiscountRepository.Exists(x=> x.Id == id) )
+            var operation = new OperationResult();
+            if (_customerDiscountRepository.Exists(x => x.Id == id))
             {
                 _customerDiscountRepository.Delete(id);
                 _customerDiscountRepository.SaveChange();

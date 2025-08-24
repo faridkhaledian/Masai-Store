@@ -57,7 +57,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         }
 
         #endregion
-        
+
         #region Search
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {

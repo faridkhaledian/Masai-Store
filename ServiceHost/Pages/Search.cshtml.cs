@@ -1,7 +1,6 @@
-using _01_LampshadeQuery.Contracts.Product;
+using _01_MasaiQuery.Contracts.Product;
 using _01_MasaiQuery.Contracts.ProductCategory;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
 
 namespace ServiceHost.Pages
 {
@@ -12,7 +11,7 @@ namespace ServiceHost.Pages
         public List<ProductQueryModel> Products;
         private readonly IProductQuery _productQuery;
         private readonly IProductCategoryQuery _productCategoryQuery;
-        public SearchModel(IProductQuery productQuery,IProductCategoryQuery productCategoryQuery)
+        public SearchModel(IProductQuery productQuery, IProductCategoryQuery productCategoryQuery)
         {
             _productQuery = productQuery;
             _productCategoryQuery = productCategoryQuery;

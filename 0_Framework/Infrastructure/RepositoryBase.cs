@@ -1,10 +1,10 @@
-﻿using System.Linq.Expressions;
-using _0_Framework.Domain;
+﻿using _0_Framework.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace _0_Framework.Infrastructure
 {
-    public class RepositoryBase<TKey,T> : IRepository<TKey,T> where T : class
+    public class RepositoryBase<TKey, T> : IRepository<TKey, T> where T : class
     {
         private readonly DbContext _context;
 
@@ -25,14 +25,14 @@ namespace _0_Framework.Infrastructure
             return _context.Set<T>().ToList();
         }
         #endregion
-        
+
         #region Create
         public void Create(T entity)
         {
             _context.Add(entity);
         }
         #endregion
-        
+
         #region Exists
         public bool Exists(Expression<Func<T, bool>> expression)
         {
@@ -40,18 +40,18 @@ namespace _0_Framework.Infrastructure
         }
 
         #endregion
-        
+
         #region SaveChange
         public void SaveChange()
         {
             _context.SaveChanges();
         }
         #endregion
-        
+
         #region Delete
         public void Delete(TKey id)
         {
-            var entity=_context.Find<T>(id);
+            var entity = _context.Find<T>(id);
             _context.Remove(entity);
         }
         #endregion

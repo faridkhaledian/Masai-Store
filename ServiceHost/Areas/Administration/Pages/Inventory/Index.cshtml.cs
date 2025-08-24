@@ -1,10 +1,8 @@
-using _0_Framework.Application;
 using InventoryManagement.Application.Contract.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contracts.Product;
-using System.Collections.Generic;
 
 namespace ServiceHost.Areas.Administration.Pages.Inventory
 {
@@ -129,7 +127,7 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
             {
                 return RedirectToPage("./Index");
             }
-            TempData["Message"] =result.Message;
+            TempData["Message"] = result.Message;
             return RedirectToPage("./Index");
         }
         #endregion

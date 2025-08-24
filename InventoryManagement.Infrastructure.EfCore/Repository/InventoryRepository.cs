@@ -59,7 +59,7 @@ namespace InventoryManagement.Infrastructure.EfCore.Repository
         public List<InventoryViewModel> Search(InventorySearchModel searchModel)
         {
             var products = _shopContext.Products.Select(x => new { x.Id, x.Name }).ToList();
-         //get all inventories
+            //get all inventories
             var query = _inventoryContext.Inventory.Select(x => new InventoryViewModel
             {
                 Id = x.Id,

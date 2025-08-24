@@ -1,38 +1,38 @@
-﻿using System.ComponentModel.DataAnnotations;
-using _0_Framework.Application;
+﻿using _0_Framework.Application;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace ShopManagement.Application.Contracts.Slide
 {
-   public  class CreateSlide
+    public class CreateSlide
     {
         [FileExtentionLimitation(new string[] { ".jpeg", ".jpg", ".png" }, ErrorMessage = ValidationMessages.InvalidFileFormat)]
         [MaxFileSizee(3 * 1024 * 1024, ErrorMessage = ValidationMessages.MaxFileSizee)]
-        public IFormFile? Picture { get;  set; }
+        public IFormFile? Picture { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         [MaxLength(500, ErrorMessage = ValidationMessages.MaxFileSizee)]
-        public string PictureAlt { get;  set; }
+        public string PictureAlt { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         [MaxLength(500, ErrorMessage = ValidationMessages.MaxFileSizee)]
-        public string PictureTitle { get;  set; }
+        public string PictureTitle { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         [MaxLength(255, ErrorMessage = ValidationMessages.MaxFileSizee)]
-        public string Heading { get;  set; }
+        public string Heading { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         [MaxLength(255, ErrorMessage = ValidationMessages.MaxFileSizee)]
-        public string Title { get;  set; }
+        public string Title { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         [MaxLength(255, ErrorMessage = ValidationMessages.MaxFileSizee)]
-        public string Text { get;  set; }
+        public string Text { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         [MaxLength(15, ErrorMessage = ValidationMessages.MaxFileSizee)]
-        public string BtnText { get;  set; }
+        public string BtnText { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         [MaxLength(1000, ErrorMessage = ValidationMessages.MaxFileSizee)]

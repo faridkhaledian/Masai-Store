@@ -1,9 +1,9 @@
-﻿using _01_LampshadeQuery.Contracts.Product;
+﻿using _01_MasaiQuery.Contracts.Product;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ServiceHost.ViewComponents
 {
-    public class AmazingProductsViewComponent :ViewComponent
+    public class AmazingProductsViewComponent : ViewComponent
     {
         private readonly IProductQuery _productQuery;
         public AmazingProductsViewComponent(IProductQuery productQuery)

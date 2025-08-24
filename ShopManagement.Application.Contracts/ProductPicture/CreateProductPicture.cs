@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using _0_Framework.Application;
+﻿using _0_Framework.Application;
 using Microsoft.AspNetCore.Http;
 using ShopManagement.Application.Contracts.Product;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace ShopManagement.Application.Contracts.ProductPicture
@@ -16,7 +16,7 @@ namespace ShopManagement.Application.Contracts.ProductPicture
         public IFormFile? Picture { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
-        [MaxLength(500,ErrorMessage =ValidationMessages.MaxFileSizee)]
+        [MaxLength(500, ErrorMessage = ValidationMessages.MaxFileSizee)]
         public string PictureAlt { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]

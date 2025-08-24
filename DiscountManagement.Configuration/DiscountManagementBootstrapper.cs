@@ -12,15 +12,15 @@ namespace DiscountManagement.Configuration
 {
     public class DiscountManagementBootstrapper
     {
-        public static void Configure(IServiceCollection services , string connectionString)
+        public static void Configure(IServiceCollection services, string connectionString)
         {
-            services.AddTransient<ICustomerDiscountApplication , CustomerDiscountApplication>();
-            services.AddTransient<ICustomerDiscountRepository , CustomerDiscountRepository>();
- 
-            services.AddTransient<IColleagueDiscountApplication , ColleagueDiscountApplication>();
-            services.AddTransient<IColleagueDiscountRepository , ColleagueDiscountRepository>();
+            services.AddTransient<ICustomerDiscountApplication, CustomerDiscountApplication>();
+            services.AddTransient<ICustomerDiscountRepository, CustomerDiscountRepository>();
 
-            services.AddDbContext<DiscountContext>(x=> x.UseSqlServer(connectionString) );
+            services.AddTransient<IColleagueDiscountApplication, ColleagueDiscountApplication>();
+            services.AddTransient<IColleagueDiscountRepository, ColleagueDiscountRepository>();
+
+            services.AddDbContext<DiscountContext>(x => x.UseSqlServer(connectionString));
         }
     }
 }

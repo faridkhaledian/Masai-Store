@@ -35,7 +35,7 @@ namespace ShopManagement.Application
             return operation.Succedded();
         }
         #endregion
-       
+
         #region Edit
         public OperationResult Edit(EditProductCategory command)
         {
@@ -46,7 +46,7 @@ namespace ShopManagement.Application
 
             if (_productCategoryRepository.Exists(x => x.Name == command.Name && x.Id != command.Id))
                 return operation.Failed(ApplicationMessage.DuplicatedRecord);
-          
+
             //convert name to slug
             var slug = command.Slug.slugify();
             //Build the right path
@@ -70,7 +70,7 @@ namespace ShopManagement.Application
         }
 
         #endregion
-        
+
         #region GetProductCategories
         public List<ProductCategoryViewModel> GetProductCategories()
         {
@@ -78,7 +78,7 @@ namespace ShopManagement.Application
         }
 
         #endregion
-        
+
         #region Search
         public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel)
         {
@@ -91,7 +91,7 @@ namespace ShopManagement.Application
         public OperationResult Delate(long id)
         {
             var operation = new OperationResult();
-            if (_productCategoryRepository.Exists(x=> x.Id == id) )
+            if (_productCategoryRepository.Exists(x => x.Id == id))
             {
                 _productCategoryRepository.Delete(id);
                 _productCategoryRepository.SaveChange();

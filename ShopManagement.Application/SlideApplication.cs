@@ -52,7 +52,7 @@ namespace ShopManagement.Application
         }
 
         #endregion
-        
+
         #region GetList
         public List<SlideViewModel> GetList()
         {
@@ -60,7 +60,7 @@ namespace ShopManagement.Application
         }
 
         #endregion
-        
+
         #region Remove
         public OperationResult Remove(long id)
         {
@@ -75,7 +75,7 @@ namespace ShopManagement.Application
         }
 
         #endregion
-        
+
         #region Restore
         public OperationResult Restore(long id)
         {
@@ -93,11 +93,11 @@ namespace ShopManagement.Application
         #endregion
 
         #region Delete
-        public OperationResult Delete(long id) 
+        public OperationResult Delete(long id)
         {
-        var operation =new OperationResult();
+            var operation = new OperationResult();
 
-            if (_slideRepository.Exists(x=> x.Id == id ) )
+            if (_slideRepository.Exists(x => x.Id == id))
             {
                 _slideRepository.Delete(id);
                 _slideRepository.SaveChange();

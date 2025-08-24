@@ -37,7 +37,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         #region Search
         public List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel)
         {
-           // Taking photos for each photo
+            // Taking photos for each photo
             var query = _context.ProductPictures.Include(x => x.Product)
                 .Select(x => new ProductPictureViewModel
                 {
@@ -54,6 +54,6 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         }
 
         #endregion
-       
+
     }
 }

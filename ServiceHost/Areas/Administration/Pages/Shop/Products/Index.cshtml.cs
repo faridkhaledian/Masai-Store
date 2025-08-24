@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -75,7 +74,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
             return new JsonResult(result);
         }
         #endregion
-        
+
         #region Delete
         public IActionResult OnGetDelete(long id)
         {
@@ -87,7 +86,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
             TempData["Message"] = result.Message;
 
             return RedirectToPage("./Index");
-         
+
         }
 
         #endregion

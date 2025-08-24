@@ -92,16 +92,16 @@ namespace ShopManagement.Application
         #region Delete
         public OperationResult Delete(long id)
         {
-            var operation= new OperationResult();
+            var operation = new OperationResult();
             if (_productRepository.Exists(x => x.Id == id))
             {
-                 _productRepository.Delete(id);
+                _productRepository.Delete(id);
 
                 _productRepository.SaveChange();
                 return operation.Succedded();
             }
             return operation.Failed(ApplicationMessage.RecordNotFound);
-          
+
         }
         #endregion
     }

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contracts.Product;
-using System.Collections.Generic;
 
 namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
 {
@@ -97,7 +96,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
         //Delete discount
         public IActionResult OnGetDelete(long id)
         {
-            var result= _colleagueDiscountApplication.Delete(id);
+            var result = _colleagueDiscountApplication.Delete(id);
             if (result.IsSucceddd)
             {
                 return RedirectToPage("./Index");

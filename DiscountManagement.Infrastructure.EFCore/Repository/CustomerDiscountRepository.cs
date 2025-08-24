@@ -10,7 +10,7 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
     {
         private readonly DiscountContext _Context;
         private readonly ShopContext _shopContext;
-        public CustomerDiscountRepository(DiscountContext context , ShopContext shopContext) : base(context)
+        public CustomerDiscountRepository(DiscountContext context, ShopContext shopContext) : base(context)
         {
             _Context = context;
             _shopContext = shopContext;
@@ -55,13 +55,13 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
             //add filter on query
             if (searchModel.ProducId > 0)
                 query = query.Where(x => x.ProducId == searchModel.ProducId);
-           
+
             if (!string.IsNullOrWhiteSpace(searchModel.StartDate))
                 query = query.Where(x => x.StartDateGr > searchModel.StartDate.ToGeorgianDateTime());
-            
+
             if (!string.IsNullOrWhiteSpace(searchModel.EndDate))
                 query = query.Where(x => x.EndDateGr < searchModel.EndDate.ToGeorgianDateTime());
-           
+
             var discounts = query.OrderByDescending(x => x.Id).ToList();
             //Fill in the product field
             discounts.ForEach(discounts =>

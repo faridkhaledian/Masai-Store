@@ -55,7 +55,7 @@ namespace ShopManagement.Application
         }
 
         #endregion
-        
+
         #region GetDetails
         public EditProductPicture GetDetails(long id)
         {
@@ -63,7 +63,7 @@ namespace ShopManagement.Application
         }
 
         #endregion
-        
+
         #region Remove
         //Disabled
         public OperationResult Remove(long id)
@@ -80,7 +80,7 @@ namespace ShopManagement.Application
         }
 
         #endregion
-        
+
         #region Search
         public List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel)
         {
@@ -88,7 +88,7 @@ namespace ShopManagement.Application
         }
 
         #endregion
-        
+
         #region Restore
         //Activation
         public OperationResult Restore(long id)
@@ -110,14 +110,14 @@ namespace ShopManagement.Application
         public OperationResult Delete(long id)
         {
             var operation = new OperationResult();
-            if (_productPictureRepository.Exists(x=> x.Id==id) )
+            if (_productPictureRepository.Exists(x => x.Id == id))
             {
                 _productPictureRepository.Delete(id);
-                _productPictureRepository.SaveChange() ;
-                return operation.Succedded() ;
+                _productPictureRepository.SaveChange();
+                return operation.Succedded();
             }
             return operation.Failed(ApplicationMessage.RecordNotFound);
-           
+
         }
         #endregion
     }

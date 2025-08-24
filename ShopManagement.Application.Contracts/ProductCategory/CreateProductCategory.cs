@@ -1,17 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using _0_Framework.Application;
+﻿using _0_Framework.Application;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace ShopManagement.Application.Contracts.ProductCategory
 {
     public class CreateProductCategory
     {
-        [Required(ErrorMessage =ValidationMessages.IsRequired)]
-        [MaxLength(255, ErrorMessage =ValidationMessages.MaxLenght)]
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
+        [MaxLength(255, ErrorMessage = ValidationMessages.MaxLenght)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage =ValidationMessages.IsRequired)]
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         [MaxLength(500, ErrorMessage = ValidationMessages.MaxLenght)]
         public string Description { get; set; }
 

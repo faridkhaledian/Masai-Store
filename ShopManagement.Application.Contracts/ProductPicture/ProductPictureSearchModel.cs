@@ -2,6 +2,6 @@
 {
     public class ProductPictureSearchModel
     {
-     public long ProductId { get; set; }
+        public long ProductId { get; set; }
     }
 }

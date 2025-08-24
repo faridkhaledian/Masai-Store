@@ -1,6 +1,6 @@
 ﻿namespace _0_Framework.Application
 {
-   public class ApplicationMessage
+    public class ApplicationMessage
     {
 
         public const string DuplicatedRecord = "امکان ثبت رکورد تکراری وجود ندارد.";

@@ -1,5 +1,5 @@
 ﻿using _0_Framework.Application;
-using _01_LampshadeQuery.Contracts.Product;
+using _01_MasaiQuery.Contracts.Product;
 using _01_MasaiQuery.Contracts.ProductCategory;
 using DiscountManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EfCore;

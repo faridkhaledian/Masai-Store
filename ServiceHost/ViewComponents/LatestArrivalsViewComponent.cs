@@ -1,4 +1,4 @@
-﻿using _01_LampshadeQuery.Contracts.Product;
+﻿using _01_MasaiQuery.Contracts.Product;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ServiceHost.ViewComponents

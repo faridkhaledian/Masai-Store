@@ -2,9 +2,9 @@
 
 namespace DiscountManagement.Domain.CustomerDiscountAgg
 {
-   public class CustomerDiscount :EntityBase
+    public class CustomerDiscount : EntityBase
     {
-        public long ProducId { get;private set; }
+        public long ProducId { get; private set; }
         public int DiscountRate { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }

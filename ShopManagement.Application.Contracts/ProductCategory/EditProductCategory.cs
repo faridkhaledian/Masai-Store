@@ -2,5 +2,5 @@
 
 public class EditProductCategory : CreateProductCategory
 {
-  public long Id { get; set; }
+    public long Id { get; set; }
 }

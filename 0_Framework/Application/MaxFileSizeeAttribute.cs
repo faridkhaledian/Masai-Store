@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace _0_Framework.Application
 {
-    public class MaxFileSizeeAttribute :ValidationAttribute ,IClientModelValidator
+    public class MaxFileSizeeAttribute : ValidationAttribute, IClientModelValidator
     {
         private readonly int _maxFileSize;
-        
+
         public MaxFileSizeeAttribute(int maxFileSize)
         {
             _maxFileSize = maxFileSize;

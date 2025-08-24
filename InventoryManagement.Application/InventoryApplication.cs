@@ -90,7 +90,7 @@ namespace InventoryManagement.Application
             //Reduce the number of product for one product
             var success = inventory.Reduce(command.Count, operatorId, command.Description, 0);
             if (!success)
-               return operation.Failed(ApplicationMessage.RecordNotNegative);
+                return operation.Failed(ApplicationMessage.RecordNotNegative);
 
             _inventoryRepository.SaveChange();
             return operation.Succedded();

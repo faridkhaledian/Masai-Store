@@ -19,7 +19,7 @@ namespace DiscountManagement.Application
             var operation = new OperationResult();
             if (_colleagueDiscountRepository.Exists(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate))
                 return operation.Failed(ApplicationMessage.DuplicatedRecord);
-            
+
             //define command discount
             var colleagueDiscount = new ColleagueDiscount(command.ProductId, command.DiscountRate);
             _colleagueDiscountRepository.Create(colleagueDiscount);
@@ -36,10 +36,10 @@ namespace DiscountManagement.Application
             var colleagueDiscount = _colleagueDiscountRepository.Get(command.Id);
             if (colleagueDiscount == null)
                 return operation.Failed(ApplicationMessage.RecordNotFound);
-   
+
             if (_colleagueDiscountRepository.Exists(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate && x.Id != command.Id))
                 return operation.Failed(ApplicationMessage.DuplicatedRecord);
-           
+
             //define command discount
             colleagueDiscount.Edit(command.ProductId, command.DiscountRate);
             _colleagueDiscountRepository.SaveChange();
@@ -65,7 +65,7 @@ namespace DiscountManagement.Application
             var colleagueDiscount = _colleagueDiscountRepository.Get(id);
             if (colleagueDiscount == null)
                 return operation.Failed(ApplicationMessage.RecordNotFound);
-            
+
             colleagueDiscount.Remove();
             _colleagueDiscountRepository.SaveChange();
             return operation.Succedded();
@@ -99,10 +99,10 @@ namespace DiscountManagement.Application
 
         #region Delete
         //Delete Physical of dataBase
-        public OperationResult Delete(long id) 
+        public OperationResult Delete(long id)
         {
-        var operation=new OperationResult();
-            if (_colleagueDiscountRepository.Exists(x=> x.Id == id) )
+            var operation = new OperationResult();
+            if (_colleagueDiscountRepository.Exists(x => x.Id == id))
             {
                 _colleagueDiscountRepository.Delete(id);
                 _colleagueDiscountRepository.SaveChange();

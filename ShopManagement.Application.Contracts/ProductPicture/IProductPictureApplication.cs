@@ -2,10 +2,10 @@
 
 namespace ShopManagement.Application.Contracts.ProductPicture
 {
-   public interface IProductPictureApplication
+    public interface IProductPictureApplication
     {
         OperationResult Create(CreateProductPicture command);
-        OperationResult Edit( EditProductPicture command);
+        OperationResult Edit(EditProductPicture command);
         //Delete record of dataBase
         OperationResult Delete(long id);
         //Disabled record

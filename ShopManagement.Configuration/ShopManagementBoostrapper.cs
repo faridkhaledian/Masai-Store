@@ -1,5 +1,4 @@
-﻿using _01_LampshadeQuery.Contracts.Product;
-using _01_LampshadeQuery.Query;
+﻿using _01_MasaiQuery.Contracts.Product;
 using _01_MasaiQuery.Contracts.ProductCategory;
 using _01_MasaiQuery.Contracts.Slide;
 using _01_MasaiQuery.Query;

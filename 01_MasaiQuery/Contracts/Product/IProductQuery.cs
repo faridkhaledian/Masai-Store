@@ -1,6 +1,6 @@
-﻿namespace _01_LampshadeQuery.Contracts.Product
+﻿namespace _01_MasaiQuery.Contracts.Product
 {
-   public interface IProductQuery
+    public interface IProductQuery
     {
         ProductQueryModel GetProductDetails(string slug);
         List<ProductQueryModel> GetLatestArrivals();

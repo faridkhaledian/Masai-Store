@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace _0_Framework.Application
 {
@@ -131,6 +130,6 @@ namespace _0_Framework.Application
         }
 
         #endregion
-       
-        }
+
+    }
 }
